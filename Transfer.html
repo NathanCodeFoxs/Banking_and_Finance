@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transfer</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(90deg, #134E5E 39%, #0B3037 95%);
+        color: #FFFFFF;
+    }
+
+    /* Header */
+    .header {
+        background-color: rgba(11, 48, 55, 0.8);
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 34px;
+        font-weight: bold;
+        position: relative;
+    }
+
+    /* Transaction History Title */
+    .section-title {
+        text-align: center;
+        color: #AC8F45;
+        font-size: 24px;
+        margin-top: 25px;
+    }
+
+    /* Scrollable Table Box */
+    .table-box {
+        width: 90%;
+        height: 150px;
+        overflow-y: auto;
+        margin: 20px auto;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
+    thead {
+        background-color: rgba(11, 48, 55, 0.8);
+        color: #AC8F45;
+        font-weight: bold;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #cccccc;
+        text-align: center;
+    }
+
+    /* Transfer Options Title */
+    .options-title {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+        padding: 15px 30px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
+        background-color: rgba(11, 48, 55, 0.8);
+    }
+
+    /* Buttons */
+    .options-container {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        margin-top: 25px;
+        margin-bottom: 50px;
+    }
+
+    .option-box {
+        background-color: rgba(11, 48, 55, 0.8);
+        width: 130px;
+        height: 130px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #FFFFFF;
+        font-size: 14px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+
+    .option-box:hover {
+        background-color: #0B3037;
+        transform: scale(1.05);
+    }
+
+    .option-box img.icon {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 8px;
+    }
+
+    .icon {
+        width: 90px;
+        height: 90px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    Transfer
+</div>
+
+<!-- TRANSACTION HISTORY -->
+<div class="section-title">Transaction History</div>
+
+<div class="table-box">
+    <table>
+        <thead>
+            <tr>
+                <th>Bank</th>
+                <th>Account Number</th>
+                <th>Account Name</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="history-body">
+            <!-- Dynamic rows OUTPUT-->
+        </tbody>
+    </table>
+</div>
+
+<!-- TRANSFER OPTIONS -->
+<div class="options-title">Transfer Options</div>
+
+<div class="options-container">
+    <a href="Bank Transfer.html" class="option-box">
+        <img src="Images/Bank_Transfer.png" class="icon">
+        Bank Transfer
+    </a>
+
+    <a href="Money Transfer.html" class="option-box">
+        <img src="Images/Money_Transfer.png" class="icon">
+        Money Transfer
+    </a>
+</div>
+
+<script>
+    // DYNAMIC DATA FOR TRANSACTION HISTORY
+    const historyData = [
+        { bank: "BBC", number: "0921241342384", name: "Joe", amount: "1,300.00", date: "11/28/2025" },
+    ];
+
+    const body = document.getElementById("history-body");
+
+    historyData.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${row.bank}</td>
+            <td>${row.number}</td>
+            <td>${row.name}</td>
+            <td>${row.amount}</td>
+            <td>${row.date}</td>
+        `;
+        body.appendChild(tr);
+    });
+</script>
+
+</body>
+</html>
