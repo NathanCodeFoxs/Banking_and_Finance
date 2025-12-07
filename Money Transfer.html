@@ -13,25 +13,73 @@
         color: #FFFFFF;
     }
 
-    /* Header */
     .header {
         background-color: rgba(11, 48, 55, 0.8);
         padding: 20px;
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 34px;
         font-weight: bold;
-        position: relative;
-    }   
+    }
+
+    .header-title {
+        color: #FFFFFF;
+    }
+
+    .header-img-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .left-btn img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+
+    .right-btn img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+    }
+
+    .left-btn { 
+    left: 15px;
+    }
+
+    .right-btn {    
+    right: 15px;
+    }
+
+    .header-btn:hover {
+        background-color: #0B3037;
+    }
+
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <div class="header">
-    Money Transfer
+
+    <a href="Transfer.html" class="header-img-btn left-btn">
+        <img src="Images/Money_Transfer.png" alt="Left Button">
+    </a>
+
+    <span class="header-title">Money Transfer</span>
+
+    <a href="#" class="header-img-btn right-btn">
+        <img src="Images/Notification.png" alt="Right Button">
+    </a>
+
 </div>
+
+<!-- BODY -->
+ 
 
 <script>
 
