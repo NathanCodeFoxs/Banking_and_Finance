@@ -4,11 +4,26 @@ if (!isset($_SESSION['user_account'])) {
     header("Location: Login.php");
     exit();
 }
+
+// Prevent caching
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+header("Expires: 0");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<script>
+window.addEventListener("pageshow", function(event) {
+    if (event.persisted || window.performance.getEntriesByType("navigation")[0].type === "back_forward") {
+        // Page is loaded from bfcache or back button
+        window.location.href = 'Login.php';
+    }
+});
+</script>
+
 <meta charset="UTF-8">
 <title>BBC Dashboard</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
@@ -238,7 +253,7 @@ a #active {
         <a onclick="goTo('Withdrawal.html')"><img src="Images/Safe_Out.png" width="20"> Withdrawal</a>
         <a onclick="goTo('Finance.html')"><img src="Images/Finance.png" width="20"> Finance</a>
         <a onclick="goTo('Settings.html')"><img src="Images/Setting.png" alt="" width="20"> Settings</a>
-        <a onclick="goTo('Login.html')"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
+        <a href="PHP/logout.php"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
     </div>
 </div>
 
@@ -295,7 +310,19 @@ a #active {
     </div>
 </div>
 
-<script src="Dashboard.js">
+<script src="Dashboard.js"> </script>
+
+<!-- prevent back button after logout -->
+
+
+<script>
+window.onload = function() {
+    history.pushState(null, null, location.href);
+    window.onpopstate = function() {
+        // If somehow the user goes back, force redirect
+        window.location.href = 'Login.php';
+    };
+};
 </script>
 
 </body>

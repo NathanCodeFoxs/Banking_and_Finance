@@ -1,4 +1,17 @@
-<?php session_start(); ?>
+<?php
+session_start();
+
+// Force browser not to cache
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
+
+// Capture error message
+$login_error = $_SESSION['login_error'] ?? '';
+unset($_SESSION['login_error']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -185,12 +198,12 @@ a:hover{
                     <h1>Login</h1>
                     <p class="welcome-text">Welcome to Big Bank Credit!</p>
 
-                    <form action="PHP/login_process.php" method="POST">
+                    <form action="PHP/login_process.php" method="POST" autocomplete="off">
                         <label>Account Number:</label>
-                        <input type="text" name="account_number" required>
+                        <input type="text" name="account_number" required autocomplete="off">
 
                         <label>Password:</label>
-                        <input type="password" name="password" required>
+                        <input type="password" name="password" required autocomplete="off">
 
                         <button class="login-btn" type="submit">Login</button>
                     </form>
@@ -198,10 +211,23 @@ a:hover{
                     <p class="small"><a href="#">Forgot Your Password?</a></p>
                     <p class="small">Don't have an account? <a href="#">Sign up</a></p>
 
+                    <?php if($login_error): ?>
+                        <p style="color:red;"><?php echo $login_error; ?></p>
+                    <?php endif; ?>
+
                 </div>
         </div>
 
     </div>
+
+<script>
+// Clear form values when page is loaded from cache/back button
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+        document.querySelectorAll('input').forEach(input => input.value = '');
+    }
+});
+</script>
 
 </body>
 </html>
