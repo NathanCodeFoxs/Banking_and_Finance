@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -184,16 +185,14 @@ a:hover{
                     <h1>Login</h1>
                     <p class="welcome-text">Welcome to Big Bank Credit!</p>
 
-                    <form>
-                        <label>Email:</label>
-                        <input type="email" required>
+                    <form action="PHP/login_process.php" method="POST">
+                        <label>Account Number:</label>
+                        <input type="text" name="account_number" required>
 
                         <label>Password:</label>
-                        <div class="password-field">
-                            <input type="password" required>
-                        </div>
+                        <input type="password" name="password" required>
 
-                        <button class="login-btn">Login</button>
+                        <button class="login-btn" type="submit">Login</button>
                     </form>
 
                     <p class="small"><a href="#">Forgot Your Password?</a></p>

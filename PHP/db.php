@@ -1,9 +1,8 @@
 <?php
-// Database connection
-$host = "localhost";  // XAMPP default
-$user = "root";       // XAMPP default
-$pass = "";           // XAMPP default
-$db   = "bank_db";    // Your database name
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db   = "bank_db";
 
 // Create connection
 $conn = new mysqli($host, $user, $pass, $db);

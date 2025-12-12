@@ -1,30 +1,60 @@
+<?php
+session_start();
+
+// Redirect to login page if user is not logged in
+if(!isset($_SESSION['user_account'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Banking and Finance System</title>
+    <title>Dashboard - BBC</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { color: #2c3e50; }
-        ul { list-style: none; padding: 0; }
-        li { margin: 10px 0; }
-        a { text-decoration: none; color: #2980b9; }
-        a:hover { text-decoration: underline; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #134E5E, #0B3037);
+            color: white;
+            padding: 40px;
+        }
+        h1 {
+            color: gold;
+        }
+        a {
+            color: #AC8F45;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .dashboard {
+            margin-top: 20px;
+        }
+        .dashboard ul {
+            list-style: none;
+            padding: 0;
+        }
+        .dashboard li {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
+    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h1>
+    <p>Account Number: <?php echo htmlspecialchars($_SESSION['user_account']); ?></p>
 
-    <h1>Welcome to Banking and Finance System</h1>
-    <p>Select an action:</p>
-
-    <ul>
-        <li><a href="PHP/test.php">Test Database Connection</a></li>
-        <li><a href="PHP/accounts.php">View Accounts</a></li>
-        <li><a href="PHP/transactions.php">View Transactions</a></li>
-        <li><a href="PHP/add_account.php">Add New Account</a></li>
-        <li><a href="PHP/deposit.php">Deposit Money</a></li>
-        <li><a href="PHP/withdraw.php">Withdraw Money</a></li>
-    </ul>
-
+    <div class="dashboard">
+        <ul>
+            <li><a href="PHP/logout.php">Logout</a></li>
+            <li><a href="#">View Accounts</a></li>
+            <li><a href="#">View Transactions</a></li>
+            <li><a href="#">Deposit Money</a></li>
+            <li><a href="#">Withdraw Money</a></li>
+        </ul>
+    </div>
 </body>
 </html>
