@@ -8,7 +8,7 @@
 <style>
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
+        font-family: "Georgia", "Times New Roman", serif;
         background: linear-gradient(90deg, #134E5E 39%, #0B3037 95%);
         color: #FFFFFF;
     }
@@ -31,7 +31,7 @@
 
     .header-title {
         font-size: 40px;
-        font-family: Arial, sans-serif;
+        font-family: "Georgia", "Times New Roman", serif;
         font-weight: 600;
         color: #FFFFFF;
     }
@@ -70,18 +70,19 @@
     .section-title {
         text-align: center;
         color: #e7c97a;
-        font-size: 24px;
-        margin-top: 25px;
+        font-size: 20px;
         background-color: #0B3037;
-        padding: 10px 25px;
+        padding: 10px 0;
+        margin: 0;
+        border-bottom: 1px solid #163F48;
+        width: 100%;
+        border-radius: 6px 6px 0 0;
     }
 
-    .table-box {
-        height: 150px;
-        overflow-y: auto;
-        background-color: rgba(11, 48, 55, 0.8);
-        padding: 10px 10px;
-        margin-bottom: 100px;
+
+    .table-box table {
+        width: 100%;
+        border-collapse: collapse;
     }
 
     table {
@@ -89,6 +90,11 @@
         border-collapse: collapse;
         background-color: #FFFFFF;
         color: #000000;
+    }
+
+    .table-scroll {
+        max-height: 170px;
+        overflow-y: auto;
     }
 
     thead {
@@ -158,6 +164,105 @@
         height: 90px;
         object-fit: contain;
         margin-bottom: 10px;
+    }
+
+    .history-box {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #0B3037;
+        border: 1px solid #163F48;
+        border-radius: 6px;
+        padding: 5px 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    /* Remove table's own border so it blends inside the box */
+    .history-box table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    /* Header row styling */
+    .history-box thead tr {
+        background: #0E3A48;
+    }
+
+    .history-box th {
+        padding: 10px;
+        border-bottom: 1px solid #163F48;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .history-box td {
+        padding: 8px 10px;
+        border-bottom: 1px solid #1A454E;
+    }
+
+    .history-box th, .history-box td {
+        padding: 6px 8px; /* smaller than 10px */
+        font-size: 13px;  /* match Bills */
+    }
+
+    .pay-options-header-wrap {
+        display: flex;
+        justify-content: center;
+        margin: 70px 0 16px;
+        margin-bottom: 40px;
+    }
+
+    .pay-options-header {
+        background: #03242e;
+        padding: 12px 80px;
+        border-radius: 50px;
+        font-size: 26px;
+        font-weight: 600;
+        color: #f7f5e9;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    }
+
+    .cards-row {
+        display: flex;
+        justify-content: center;
+        gap: 100px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+
+    .bill-card {
+        width: 150px;
+        text-align: center;
+        transition: 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .bill-card-top {
+        background: #022933;
+        border-radius: 12px 12px 0 0;
+        padding: 18px 10px 22px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.7);
+    }
+
+    .bill-icon img {
+        width: 45px;
+        height: 45px;
+        object-fit: contain;
+        margin-bottom: 8px;
+    }
+
+    .bill-label {
+        font-size: 14px;
+        color: #FFFFFF;
+    }
+
+    .bill-card:hover {
+        transform: translateY(-8px) scale(1.05);
+    }
+
+    .bill-card:hover .bill-card-top {
+        box-shadow: 0 6px 20px rgba(0,0,0,0.8);
+        background: #033543;
     }
 
     /* ========[ SIDEBAR ]======== */
@@ -234,9 +339,10 @@
 </div>
 
 <!-- TRANSACTION HISTORY -->
+<div class="history-box">
 <div class="section-title">Transaction History</div>
 
-<div class="table-box">
+ <div class="table-scroll" style="max-height: 150px; overflow-y: auto;">
     <table>
         <thead>
             <tr>
@@ -252,19 +358,26 @@
         </tbody>
     </table>
 </div>
+</div>
 
 <!-- TRANSFER OPTIONS -->
-<div class="options-title">Transfer Options</div>
+<div class="pay-options-header-wrap">
+    <div class="pay-options-header">Transfer Options</div>
+</div>
 
-<div class="options-container">
-    <a href="Bank Transfer.html" class="option-box">
-        <img src="Images/Bank_Transfer.png" class="icon">
-        Bank Transfer
+<div class="cards-row">
+    <a href="Bank Transfer.html" class="bill-card">
+        <div class="bill-card-top">
+            <div class="bill-icon"><img src="Images/Bank_Transfer.png" alt=""></div>
+            <div class="bill-label">Bank Transfer</div>
+        </div>
     </a>
 
-    <a href="Money Transfer.html" class="option-box">
-        <img src="Images/Money_Transfer.png" class="icon">
-        Money Transfer
+    <a href="Money Transfer.html" class="bill-card">
+        <div class="bill-card-top">
+            <div class="bill-icon"><img src="Images/Money_Transfer.png" alt=""></div>
+            <div class="bill-label">Money Transfer</div>
+        </div>
     </a>
 </div>
 
