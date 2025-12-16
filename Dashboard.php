@@ -252,27 +252,27 @@ a #active {
 <!-- ======[ SIDEBAR ]====== -->
 <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
-        <a id="active" ><img src="Images/home.png" alt="" width="20"> Dashboard</a>
+        <a onclick="goTo('Dashboard.php')" ><img src="Images/home.png" alt="" width="20"> Dashboard</a>
         <a onclick="goTo('Transfer.php')"><img src="Images/Transfer.png" width="20"> Transfer</a>
         <a onclick="goTo('Bills.php')"><img src="Images/Bill.png" width="20"> Bills</a>
         <a onclick="goTo('Loan.php')"><img src="Images/Loan.png" width="20"> Loan</a>
-        <a onclick="openDeposit()"><img src="Images/Safe_In.png" width="20"> Deposit</a>
-        <a onclick="goTo('Withdrawal.php')"><img src="Images/Safe_Out.png" width="20"> Withdrawal</a>
+        <a onclick="goTo('Deposit.php')"><img src="Images/Safe_In.png" width="20"> Deposit</a>
+        <a onclick="goTo('Withdraw.php')"><img src="Images/Safe_Out.png" width="20"> Withdrawal</a>
         <a onclick="goTo('Finance.php')"><img src="Images/Finance.png" width="20"> Finance</a>
-        <a onclick="goTo('Settings.php')"><img src="Images/Setting.png" alt="" width="20"> Settings</a>
-        <a href="PHP/logout.php"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
+        <a onclick="goTo('settings.php')"><img src="Images/Setting.png" alt="" width="20"> Settings</a>
+        <a onclick="goTo('logout.php')"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
     </div>
 </div>
 
 <!-- =====[ NAVBAR ]===== -->
-<div class="header">
+<div class="nav-head">
     <div class="menu-icon" onclick="openSidebar()"><img src="Images/Sidebar.png" alt="" width="40"></div>
-        <img src="Images/logo.png" alt="company logo" class="header-logo">
-        <p class="acro_compa">BBC</p>
-        <span>
+        <span class="header-title">Transfer</span>
+        <span class="bell-icon">
             <img src="Images/Notification.png" alt="notification" width="30">
         </span>
     </div>
+</div>
 
 <!-- =====[ BALANCE CARD ]===== -->
 <div class="balance-container">
@@ -337,7 +337,7 @@ function toggleBalance() {
     </div>
 </div>
 
-<script src="Dashboard.js"> </script>
+<script src="Dashboard.js"></script>
 
 <!-- prevent back button after logout -->
 
