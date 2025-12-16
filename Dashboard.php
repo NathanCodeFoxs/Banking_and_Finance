@@ -43,12 +43,26 @@ if ($user_id) {
     background: #0b2931;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
+
+.header-title {
+            color: #FFFFFF;
+        }
 
 .header-logo{
     height: 80px;
     margin: 10px 10px;
 }
+
+.nav-head{
+    width: 100%;
+    height: 80px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
 
 .acro_compa{
     display: inline-block;
@@ -200,43 +214,7 @@ a #active {
     transform: scale(1.1);
 }
 
-/* =====[ POPUP ]===== */
-.popup-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
 
-.popup-box {
-    background: #ffffff;
-    width: 350px;
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    font-family: Arial;
-}
-
-.popup-box input {
-    width: 80%;
-    padding: 10px;
-    font-size: 18px;
-    margin-top: 15px;
-}
-
-.popup-box button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    font-size: 16px;
-    cursor: pointer;
-    background: #ac8f45;
-    color: white;
-    border: none;
-    border-radius: 8px;
-}
 </style>
 <body>
 
@@ -265,6 +243,8 @@ a #active {
         </span>
     </div>
 </div>
+
+<script src="Dashboard.js"></script>
 <!-- =====[ BALANCE CARD ]===== -->
 <div class="balance-container">
     <div class="balance-card">
@@ -300,32 +280,21 @@ function toggleBalance() {
     <a class="icon-btn" onclick="goTo('Transfer.php')">
         <img src="Images/Transfer.png"><p>Transfer</p>
     </a>
-    <a class="icon-btn" onclick="goTo('bills.html')">
+    <a class="icon-btn" onclick="goTo('Bills.php')">
         <img src="Images/Bill.png"><p>Bills</p>
     </a>
-    <a class="icon-btn" onclick="goTo('loan.html')">
+    <a class="icon-btn" onclick="goTo('Loan.php')">
         <img src="Images/Loan.png"><p>Loan</p>
     </a>
-    <a class="icon-btn" onclick="openDeposit()">
+    <a class="icon-btn" onclick="goTo('Deposit.php')">
         <img src="Images/Safe_In.png"><p>Deposit</p>
     </a>
-    <a class="icon-btn" onclick="goTo('withdraw.html')">
+    <a class="icon-btn" onclick="goTo('Withdrawal.php')">
         <img src="Images/Safe_Out.png"><p>Withdrawal</p>
     </a>
-    <a class="icon-btn" onclick="goTo('finance.html')">
+    <a class="icon-btn" onclick="goTo('Finance.php')">
         <img src="Images/Finance.png"><p>Finance</p>
     </a>
-</div>
-
-<!-- ===== DEPOSIT POPUP ===== -->
-<div class="popup-bg" id="depositPopup">
-    <div class="popup-box">
-        <h3>Enter Deposit Amount</h3>
-        <input type="number" id="depositAmount" placeholder="₱ 0.00">
-        <br>
-        <button onclick="addDeposit()">Submit</button>
-        <button onclick="closePopup()" style="background:#555;">Cancel</button>
-    </div>
 </div>
 
 <script src="Dashboard.js"></script>

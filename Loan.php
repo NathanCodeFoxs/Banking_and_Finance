@@ -153,6 +153,15 @@
     justify-content: space-between;
 }
 
+.nav-head{
+    width: 100%;
+    height: 80px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
 .sidebar {
     width: 280px;
     height: 100%;
