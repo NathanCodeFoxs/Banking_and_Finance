@@ -7,9 +7,42 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 header("Expires: 0");
 
-// Capture error message
-$login_error = $_SESSION['login_error'] ?? '';
-unset($_SESSION['login_error']);
+// Include DB connection
+require_once __DIR__ . "/PHP/db.php";
+
+$login_error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $account_number = $_POST['account_number'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    if ($account_number && $password) {
+        $stmt = $conn->prepare("SELECT id, password FROM users WHERE account_number=? LIMIT 1");
+        $stmt->bind_param("s", $account_number);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($id, $password_db);
+        
+        if ($stmt->num_rows > 0) {
+            $stmt->fetch();
+            if (password_verify($password, $password_db)) {
+                // Correct login: set session
+                $_SESSION['user_id'] = $id;
+                $_SESSION['account_number'] = $account_number;
+
+                header("Location: Dashboard.php");
+                exit;
+            } else {
+                $login_error = "Invalid account number or password!";
+            }
+        } else {
+            $login_error = "Invalid account number or password!";
+        }
+        $stmt->close();
+    } else {
+        $login_error = "Please enter account number and password!";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +54,7 @@ unset($_SESSION['login_error']);
     <link rel="stylesheet" href="login.css" />
 </head>
 <style>
-    /* GENERAL */
+/* GENERAL */
 body {
     margin: 0;
     padding: 0;
@@ -29,13 +62,12 @@ body {
     background: linear-gradient(to right, #134E5E,#0B3037);
     overflow: hidden;
 }
-/*Header level*/
+/* Header */
 .header{
     width: 100%;
     height: 100px;
     background: #0b2931;
     display: flex;
-
     align-items: center;
 }
 
@@ -101,7 +133,6 @@ body {
     align-items: center;
     margin-bottom: 100px;
 }
-
 
 .login-box {
     width: 45%;
@@ -176,7 +207,6 @@ a:hover{
     color: #cda85c;
     text-decoration: underline;
 }
-
 </style>
 <body>
     <div class="header">
@@ -184,7 +214,6 @@ a:hover{
         <p class="acro_compa">BBC</p>
     </div>
     <div class="container">
-
         <!-- Left Section -->
         <div class="left-section">
             <div class="logo-circle">
@@ -194,30 +223,28 @@ a:hover{
 
         <!-- Right Section -->
         <div class="right-section">
-                <div class="login-box">
-                    <h1>Login</h1>
-                    <p class="welcome-text">Welcome to Big Bank Credit!</p>
+            <div class="login-box">
+                <h1>Login</h1>
+                <p class="welcome-text">Welcome to Big Bank Credit!</p>
 
-                    <form action="PHP/login_process.php" method="POST" autocomplete="off">
-                        <label>Account Number:</label>
-                        <input type="text" name="account_number" required autocomplete="off">
+                <form method="POST" autocomplete="off">
+                    <label>Account Number:</label>
+                    <input type="text" name="account_number" required autocomplete="off">
 
-                        <label>Password:</label>
-                        <input type="password" name="password" required autocomplete="off">
+                    <label>Password:</label>
+                    <input type="password" name="password" required autocomplete="off">
 
-                        <button class="login-btn" type="submit">Login</button>
-                    </form>
+                    <button class="login-btn" type="submit">Login</button>
+                </form>
 
-                    <p class="small"><a href="#">Forgot Your Password?</a></p>
-                    <p class="small">Don't have an account? <a href="#">Sign up</a></p>
+                <p class="small"><a href="#">Forgot Your Password?</a></p>
+                <p class="small">Don't have an account? <a href="#">Sign up</a></p>
 
-                    <?php if($login_error): ?>
-                        <p style="color:red;"><?php echo $login_error; ?></p>
-                    <?php endif; ?>
-
-                </div>
+                <?php if($login_error): ?>
+                    <p style="color:red;"><?php echo $login_error; ?></p>
+                <?php endif; ?>
+            </div>
         </div>
-
     </div>
 
 <script>

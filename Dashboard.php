@@ -1,22 +1,40 @@
-<?php require_once __DIR__ . "/PHP/auth.php"; ?>
+<?php
+require_once __DIR__ . "/PHP/auth.php";   // session start & redirect if not logged in
+require_once __DIR__ . "/PHP/db.php";     // database connection
+
+// Get the logged-in user ID
+$user_id = $_SESSION['user_id'] ?? null;
+
+// Default balance
+$balance = 0.00;
+
+if ($user_id) {
+    // Fetch balance from MySQL
+    $stmt = $conn->prepare("SELECT balance FROM balances WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($balance);
+    $stmt->fetch();
+    $stmt->close();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<title>BBC Dashboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
+<link rel="stylesheet" href="dashboard.css">
 
 <script>
 window.addEventListener("pageshow", function(event) {
     if (event.persisted || window.performance.getEntriesByType("navigation")[0].type === "back_forward") {
-        // Page is loaded from bfcache or back button
         window.location.href = 'Login.php';
     }
 });
 </script>
 
-<meta charset="UTF-8">
-<title>BBC Dashboard</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
-<link rel="stylesheet" href="dashboard.css">
 </head>
 <style>
     body {
@@ -256,15 +274,35 @@ a #active {
         </span>
     </div>
 
-<!-- =====[ BALANCE ]===== -->
+<!-- =====[ BALANCE CARD ]===== -->
 <div class="balance-container">
     <div class="balance-card">
         <div class="balance-label">
-            AVAILABLE BALANCE <span class="eye-icon" id="eyeIcon" onclick="toggleBalance()"><img src="Images/Eye.png" alt="" width="20"></span>
+            AVAILABLE BALANCE 
+            <span class="eye-icon" id="eyeIcon" onclick="toggleBalance()">
+                <img src="Images/Eye.png" alt="" width="20">
+            </span>
         </div>
-        <div class="balance-amount" id="balance">₱ 1532.43</div>
+        <div class="balance-amount" id="balance">
+            ₱ <?php echo number_format($balance, 2); ?>
+        </div>
     </div>
 </div>
+
+<script>
+let balanceVisible = true;
+function toggleBalance() {
+    const balanceElement = document.getElementById("balance");
+    if (balanceVisible) {
+        balanceElement.innerText = "●●●●●●●";
+        balanceVisible = false;
+    } else {
+        balanceElement.innerText = "₱ <?php echo number_format($balance, 2); ?>";
+        balanceVisible = true;
+    }
+}
+</script>
+
 
 <!-- =====[ ICON ROW ]===== -->
 <div class="icon-row">
@@ -316,4 +354,3 @@ window.onload = function() {
 
 </body>
 </html>
-
