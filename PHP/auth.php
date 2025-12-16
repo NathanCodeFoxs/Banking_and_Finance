@@ -2,7 +2,7 @@
 session_start();
 
 // Block access if not logged in
-if (!isset($_SESSION['user_account'])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: Login.php");
     exit();
 }
