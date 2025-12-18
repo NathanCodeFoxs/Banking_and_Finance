@@ -63,7 +63,7 @@
     .card {
         width: 450px;
         margin: 90px auto 0;
-        padding: 40px 45px 120px;
+        padding: 40px;
         background: rgba(0, 0, 0, 0.32);
         text-align: center;
         box-shadow: 0 8px 25px rgba(0,0,0,0.35);
