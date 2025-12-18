@@ -226,7 +226,7 @@
 
     <div class="balance-box">
         <div class="balance-label">AVAILABLE BALANCE</div>
-        <div class="balance-value" id="balance">₱ 10,000</div>
+        <div class="balance-value" id="balance">₱ 10,000.00</div>
     </div>
 
     <div class="input-wrap">
