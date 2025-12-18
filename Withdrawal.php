@@ -78,15 +78,16 @@
     }
 
     .balance-label {
-        font-size: 12px;
-        letter-spacing: 1px;
+        color: white;
+        font-size: 20px;
+        letter-spacing: 2px;
     }
 
     .balance-value {
-        font-size: 38px;
-        font-weight: 600;
         color: white;
+        font-size: 64px;
         margin-top: 5px;
+        margin-right: 25px;
     }
 
     .input-wrap {
