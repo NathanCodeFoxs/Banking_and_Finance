@@ -126,25 +126,27 @@
 
 <!-- TRANSFER FORM FRAME -->
 <div class="frame">
+<form action="PHP/process_bank_transfer.php" method="POST">
 
     <label for="Bank">Bank:</label>
-    <select name="bank" id="Bank">
-        <option value="bdo">BDO</option>
-        <option value="bpi">BPI</option>
-        <option value="gcash">Gcash</option>
+    <select name="bank" id="Bank" required>
+        <option value="BDO">BDO</option>
+        <option value="BPI">BPI</option>
+        <option value="GCash">GCash</option>
     </select>
 
     <label>Account Number</label>
-    <input type="text" placeholder="Enter Account Number">
+    <input type="text" name="to_account" required>
 
     <label>Account Name</label>
-    <input type="text" placeholder="Enter Account Name">
+    <input type="text" name="to_name" required>
 
     <label>Money Amount</label>
-    <input type="number" placeholder="Enter Amount">
+    <input type="number" name="amount" min="1" required>
 
-    <button class="confirm-btn">Confirm</button>
+    <button type="submit" class="confirm-btn">Confirm</button>
 
+</form>
 </div>
 
 </body>
