@@ -36,6 +36,7 @@ if ($user_id) {
     overflow: hidden;
 }
 
+
 /* =====[ NAVBAR ]===== */
 .header{
     width: 100%;

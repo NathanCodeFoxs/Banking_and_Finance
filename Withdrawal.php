@@ -11,7 +11,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-        font-family: "Poppins", sans-serif;
+        font-family: "Georgia", "Times New Roman", serif;
         height: 100vh;
         overflow: hidden;
         background: linear-gradient(90deg, #134E5E 39%, #0B3037 95%);
@@ -28,35 +28,17 @@
         border-bottom: 2px solid rgba(255, 255, 255, 0.15);
     }
 
-    .nav-head{
-    width: 100%;
-    height: 80px;
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    }
-
-    .icon-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 45px;
-        height: 45px;
-        background: #0c3d4a;
-        border-radius: 8px;
+    .nav-head {
+        width: 100%;
+        height: 80px;
+        background: transparent;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        cursor: pointer;
     }
-
-    .left { left: 30px; }
-    .right { right: 30px; }
 
     .header-title {
         font-size: 40px;
-        font-family: "Georgia", "Times New Roman", serif;
         font-weight: 600;
         color: #FFFFFF;
     }
@@ -69,6 +51,7 @@
         text-align: center;
         box-shadow: 0 8px 20px rgba(0,0,0,0.35);
         border-radius: 6px;
+        font-family: "Georgia", "Times New Roman", serif;
     }
 
     .balance-box {
@@ -76,20 +59,17 @@
         padding: 12px 18px;   
         border-radius: 16px;
         margin-bottom: 25px;
-        color: #073c45;
         text-align: center;
     }
 
     .balance-label {
-        color: white;
-        font-size: 14px;
+        font-size: 16px;
         letter-spacing: 1.5px;
         margin-bottom: 4px;
     }
 
     .balance-value {
-        color: white;
-        font-size: clamp(24px, 4vw, 32px); 
+        font-size: 28px; 
         line-height: 1.2;
     }
 
@@ -100,7 +80,7 @@
     }
 
     .label {
-        font-size: 14px;
+        font-size: 16px;
         margin-bottom: 8px;
     }
 
@@ -113,6 +93,7 @@
         color: white;
         font-size: 16px;
         outline: none;
+        font-family: "Georgia", "Times New Roman", serif;
     }
 
     button {
@@ -121,13 +102,14 @@
         background: #AC8F45;
         border: none;
         border-radius: 10px;
-        font-size: 17px;
+        font-size: 18px;
         font-weight: bold;
-        color: #ffffffff;
+        color: #fff;
         cursor: pointer;
+        font-family: "Georgia", "Times New Roman", serif;
     }
 
-              /* ========[ SIDEBAR ]======== */
+    /* ========[ SIDEBAR ]======== */
     .sidebar-bg {
         position: fixed;
         top: 0; left: 0;
@@ -139,7 +121,7 @@
         z-index: 10;
     }
 
-    .header{
+    .header {
         width: 100%;
         height: 100px;
         background: #0b2931;
@@ -163,12 +145,13 @@
         display: block;
         padding: 18px 30px;
         color: #ac8f45;
-        font-size: 20px;
+        font-size: 18px;
         text-decoration: none;
         cursor: pointer;
+        font-family: "Georgia", "Times New Roman", serif;
     }
 
-    .sidebar img{
+    .sidebar img {
         margin-right: 15px;
         vertical-align: middle;
     }
@@ -183,16 +166,18 @@
         color: white;
         margin-left: 20px;
     }
+
     .bell-icon {
         margin-right: 20px;
     }
+
     .title {
         font-size: 36px;
         font-weight: 600;
         letter-spacing: 1px;
     }
-    </style>
-    </head>
+</style>
+</head>
 
 <body>
 
@@ -200,7 +185,7 @@
 <div class="header">
 <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
-        <a onclick="goTo('Dashboard.php')" ><img src="Images/home.png" alt="" width="20"> Dashboard</a>
+        <a onclick="goTo('Dashboard.php')"><img src="Images/home.png" alt="" width="20"> Dashboard</a>
         <a onclick="goTo('Transfer.php')"><img src="Images/Transfer.png" width="20"> Transfer</a>
         <a onclick="goTo('Bills.php')"><img src="Images/Bill.png" width="20"> Bills</a>
         <a onclick="goTo('Loan.php')"><img src="Images/Loan.png" width="20"> Loan</a>
@@ -223,7 +208,6 @@
 </div>
 
 <div class="card">
-
     <div class="balance-box">
         <div class="balance-label">AVAILABLE BALANCE</div>
         <div class="balance-value" id="balance">₱ 10,000.00</div>

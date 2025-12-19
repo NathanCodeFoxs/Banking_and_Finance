@@ -3,238 +3,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: linear-gradient(90deg, #134E5E 39%, #0B3037 95%);
-            color: #FFFFFF;
-        }
-
-        .header {
-            background-color: rgba(11, 48, 55, 0.8);
-            display: flex;
-            justify-content:center;
-            align-items: center;
-            font-size: 34px;
-            font-weight: bold;
-            position: relative;
-        }
-
-        .nav-head{
-    width: 100%;
-    height: 80px;
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance</title>
+  <style>
+    /* Global font + background */
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      margin: 0;
+      background: linear-gradient(90deg, #134E5E 39%, #0B3037 95%);
+      color: #FFFFFF;
     }
 
-        .header-title {
-            font-size: 40px;
-            font-family: "Georgia", "Times New Roman", serif;
-            font-weight: 600;
-            color: #FFFFFF;
-        }
+    /* Header */
+    .header {
+      background-color: rgba(11, 48, 55, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 34px;
+      font-weight: bold;
+      position: relative;
+    }
 
-        .header-img-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
+    .nav-head {
+      width: 100%;
+      height: 80px;
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .left-btn img {
-            width: 50px;
-            height: 50px;
-        }
+    .header-title {
+      font-size: 40px;
+      font-weight: 600;
+      color: #FFFFFF;
+      font-family: "Georgia", "Times New Roman", serif;
+    }
 
-        .right-btn img {
-            width: 30px;
-            height: 30px;
-        }
+    /* Sidebar */
+    .sidebar-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      overflow: hidden;
+      transition: 0.3s ease;
+      z-index: 10;
+    }
 
-        .left-btn { left: 15px; }
-        .right-btn { right: 15px; }
+    .header {
+      width: 100%;
+      height: 100px;
+      background: #0b2931;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        .card {
-            width: 700px;
-            margin: 60px auto;
-            padding: 30px;
-            background-color: rgba(11, 48, 55, 0.8);
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
+    .sidebar {
+      width: 280px;
+      height: 100%;
+      background: #0b1f29;
+      left: -280px;
+      top: 0;
+      padding-top: 40px;
+      transition: 0.3s ease;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+    }
 
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
+    .sidebar a {
+      display: block;
+      padding: 18px 30px;
+      color: #ac8f45;
+      font-size: 18px; /* unified font size */
+      text-decoration: none;
+      cursor: pointer;
+      font-family: "Georgia", "Times New Roman", serif;
+    }
 
-        th, td {
-            padding: 15px;
-            text-align: left;
-            font-size: 18px;
-            border-bottom: 1px solid #AC8F45;
-        }
+    .sidebar img {
+      margin-right: 15px;
+      vertical-align: middle;
+    }
 
-        th {
-            background-color: #0B3037;
-            color: #AC8F45;
-        }
+    .sidebar a:hover {
+      background: #10303a;
+    }
 
-        td {
-            color: #FFFFFF;
-        }
+    .menu-icon {
+      font-size: 32px;
+      cursor: pointer;
+      color: white;
+      margin-left: 20px;
+    }
 
-        .total-row {
-            font-weight: bold;
-            background-color: #0B3037;
-        }
+    .bell-icon {
+      margin-right: 20px;
+    }
 
-        .total-cell {
-            font-size: 24px;
-            color: #AC8F45;
-        }
+    /* Card + Table */
+    .card {
+      width: 700px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: rgba(11, 48, 55, 0.8);
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      font-family: "Georgia", "Times New Roman", serif;
+    }
 
-                      /* ========[ SIDEBAR ]======== */
-.sidebar-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    overflow: hidden;
-    transition: 0.3s ease;
-    z-index: 10;
-}
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
 
-.header{
-    width: 100%;
-    height: 100px;
-    background: #0b2931;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.sidebar {
-    width: 280px;
-    height: 100%;
-    background: #0b1f29;
-    left: -280px;
-    top: 0;
-    padding-top: 40px;
-    transition: 0.3s ease;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.4);
-}
+    th, td {
+      padding: 15px;
+      text-align: left;
+      font-size: 18px; /* unified table font size */
+      border-bottom: 1px solid #AC8F45;
+      font-family: "Georgia", "Times New Roman", serif;
+    }
 
-.sidebar a {
-    display: block;
-    padding: 18px 30px;
-    color: #ac8f45;
-    font-size: 20px;
-    text-decoration: none;
-    cursor: pointer;
-}
+    th {
+      background-color: #0B3037;
+      color: #AC8F45;
+      font-size: 20px; /* slightly larger for headers */
+    }
 
-.sidebar img{
-    margin-right: 15px;
-    vertical-align: middle;
-}
+    td {
+      color: #FFFFFF;
+    }
 
-.sidebar a:hover {
-    background: #10303a;
-}
+    .total-row {
+      font-weight: bold;
+      background-color: #0B3037;
+    }
 
-.menu-icon {
-    font-size: 32px;
-    cursor: pointer;
-    color: white;
-    margin-left: 20px;
-}
-.bell-icon {
-    margin-right: 20px;
-}
-.title {
-    font-size: 36px;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-    </style>
+    .total-cell {
+      font-size: 22px; /* highlight total */
+      color: #AC8F45;
+    }
+  </style>
 </head>
 <body>
 
 <!-- ======[ SIDEBAR ]====== -->
 <div class="header">
-<div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
+  <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
-        <a onclick="goTo('Dashboard.php')" ><img src="Images/home.png" alt="" width="20"> Dashboard</a>
-        <a onclick="goTo('Transfer.php')"><img src="Images/Transfer.png" width="20"> Transfer</a>
-        <a onclick="goTo('Bills.php')"><img src="Images/Bill.png" width="20"> Bills</a>
-        <a onclick="goTo('Loan.php')"><img src="Images/Loan.png" width="20"> Loan</a>
-        <a onclick="goTo('Deposit.php')"><img src="Images/Safe_In.png" width="20"> Deposit</a>
-        <a onclick="goTo('Withdrawal.php')"><img src="Images/Safe_Out.png" width="20"> Withdrawal</a>
-        <a onclick="goTo('Finance.php')"><img src="Images/Finance.png" width="20"> Finance</a>
-        <a onclick="goTo('settings.php')"><img src="Images/Setting.png" alt="" width="20"> Settings</a>
-        <a onclick="goTo('PHP/logout.php')"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
+      <a onclick="goTo('Dashboard.php')"><img src="Images/home.png" alt="" width="20"> Dashboard</a>
+      <a onclick="goTo('Transfer.php')"><img src="Images/Transfer.png" width="20"> Transfer</a>
+      <a onclick="goTo('Bills.php')"><img src="Images/Bill.png" width="20"> Bills</a>
+      <a onclick="goTo('Loan.php')"><img src="Images/Loan.png" width="20"> Loan</a>
+      <a onclick="goTo('Deposit.php')"><img src="Images/Safe_In.png" width="20"> Deposit</a>
+      <a onclick="goTo('Withdrawal.php')"><img src="Images/Safe_Out.png" width="20"> Withdrawal</a>
+      <a onclick="goTo('Finance.php')"><img src="Images/Finance.png" width="20"> Finance</a>
+      <a onclick="goTo('settings.php')"><img src="Images/Setting.png" alt="" width="20"> Settings</a>
+      <a onclick="goTo('PHP/logout.php')"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
     </div>
-</div>
+  </div>
 
-<!-- =====[ NAVBAR ]===== -->
-<div class="nav-head">
+  <!-- =====[ NAVBAR ]===== -->
+  <div class="nav-head">
     <div class="menu-icon" onclick="openSidebar()"><img src="Images/Sidebar.png" alt="" width="40"></div>
-        <span class="header-title">Finance</span>
-        <span class="bell-icon">
-            <img src="Images/Notification.png" alt="notification" width="30">
-        </span>
-    </div>
+    <span class="header-title">Finance</span>
+    <span class="bell-icon">
+      <img src="Images/Notification.png" alt="notification" width="30">
+    </span>
+  </div>
 </div>
 
 <div class="card">
-    <table>
-        <tr>
-            <th>Category</th>
-            <th>Amount</th>
-        </tr>
-        <tr>
-            <td>Income</td>
-            <td>₱12,000</td>
-        </tr>
-        <tr>
-            <td>Budgeting</td>
-            <td>₱5,000</td>
-        </tr>
-        <tr>
-            <td>Debt Management</td>
-            <td>₱1,500</td>
-        </tr>
-        <tr>
-            <td>Emergency Fund</td>
-            <td>₱1,000</td>
-        </tr>
-        <tr>
-            <td>Savings</td>
-            <td>₱2,000</td>
-        </tr>
-        <tr>
-            <td>Insurance</td>
-            <td>₱500</td>
-        </tr>
-        <tr>
-            <td>Tax Planning</td>
-            <td>₱468</td>
-        </tr>
-        <tr class="total-row">
-            <td>Total:</td>
-            <td class="total-cell">₱15,532.43</td>
-        </tr>
-    </table>
+  <table>
+    <tr>
+      <th>Category</th>
+      <th>Amount</th>
+    </tr>
+    <tr><td>Income</td><td>₱12,000</td></tr>
+    <tr><td>Budgeting</td><td>₱5,000</td></tr>
+    <tr><td>Debt Management</td><td>₱1,500</td></tr>
+    <tr><td>Emergency Fund</td><td>₱1,000</td></tr>
+    <tr><td>Savings</td><td>₱2,000</td></tr>
+    <tr><td>Insurance</td><td>₱500</td></tr>
+    <tr><td>Tax Planning</td><td>₱468</td></tr>
+    <tr class="total-row">
+      <td>Total:</td>
+      <td class="total-cell">₱15,532.43</td>
+    </tr>
+  </table>
 </div>
+
+<script src="Dashboard.js"></script>
 </body>
-<script src="Dashboard.js"> </script>
 </html>

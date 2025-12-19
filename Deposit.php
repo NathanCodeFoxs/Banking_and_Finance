@@ -12,16 +12,24 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
+        font-family: "Georgia", "Times New Roman", serif;
     }
 
     body {
-        font-family: "Poppins", sans-serif;
+        font-family: "Georgia", "Times New Roman", serif;
         height: 100vh;
         overflow: hidden;
         background: linear-gradient(90deg, #134E5E 39%, #0B3037 95%);
         color: white;
     }
+    .card-label {
+    font-size: 20px;          /* consistent font size */
+    font-weight: 600;
+    color: #c7a043;           /* gold accent */
+    margin-bottom: 25px;
+    text-align: center;       /* centered at the top */
+}
+
 
     .top-header {
         height: 80px;
@@ -52,7 +60,6 @@
 
     .header-title {
         font-size: 40px;
-        font-family: "Georgia", "Times New Roman", serif;
         font-weight: 600;
         color: #FFFFFF;
     }
@@ -74,7 +81,7 @@
     }
 
     .label {
-        font-size: 14px;
+        font-size: 16px;
         margin-bottom: 8px;
     }
 
@@ -95,85 +102,87 @@
         background: #AC8F45;
         border: none;
         border-radius: 10px;
-        font-size: 17px;
+        font-size: 18px;
         font-weight: bold;
         color: #073c45;
         cursor: pointer;
     }
 
-          /* ========[ SIDEBAR ]======== */
-.sidebar-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    overflow: hidden;
-    transition: 0.3s ease;
-    z-index: 10;
-}
-
-.header{
-    width: 100%;
-    height: 100px;
-    background: #0b2931;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-head{
-    width: 100%;
-    height: 80px;
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /* ========[ SIDEBAR ]======== */
+    .sidebar-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 0;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        overflow: hidden;
+        transition: 0.3s ease;
+        z-index: 10;
     }
 
-.sidebar {
-    width: 280px;
-    height: 100%;
-    background: #0b1f29;
-    left: -280px;
-    top: 0;
-    padding-top: 40px;
-    transition: 0.3s ease;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.4);
-}
+    .header {
+        width: 100%;
+        height: 100px;
+        background: #0b2931;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-.sidebar a {
-    display: block;
-    padding: 18px 30px;
-    color: #ac8f45;
-    font-size: 20px;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .nav-head {
+        width: 100%;
+        height: 80px;
+        background: transparent;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-.sidebar img{
-    margin-right: 15px;
-    vertical-align: middle;
-}
+    .sidebar {
+        width: 280px;
+        height: 100%;
+        background: #0b1f29;
+        left: -280px;
+        top: 0;
+        padding-top: 40px;
+        transition: 0.3s ease;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+    }
 
-.sidebar a:hover {
-    background: #10303a;
-}
+    .sidebar a {
+        display: block;
+        padding: 18px 30px;
+        color: #ac8f45;
+        font-size: 18px;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-.menu-icon {
-    font-size: 32px;
-    cursor: pointer;
-    color: white;
-    margin-left: 20px;
-}
-.bell-icon {
-    margin-right: 20px;
-}
-.title {
-    font-size: 36px;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
+    .sidebar img {
+        margin-right: 15px;
+        vertical-align: middle;
+    }
+
+    .sidebar a:hover {
+        background: #10303a;
+    }
+
+    .menu-icon {
+        font-size: 32px;
+        cursor: pointer;
+        color: white;
+        margin-left: 20px;
+    }
+
+    .bell-icon {
+        margin-right: 20px;
+    }
+
+    .title {
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
 </style>
 </head>
 
@@ -183,7 +192,7 @@
 <div class="header">
 <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
-        <a onclick="goTo('Dashboard.php')" ><img src="Images/home.png" alt="" width="20"> Dashboard</a>
+        <a onclick="goTo('Dashboard.php')"><img src="Images/home.png" alt="" width="20"> Dashboard</a>
         <a onclick="goTo('Transfer.php')"><img src="Images/Transfer.png" width="20"> Transfer</a>
         <a onclick="goTo('Bills.php')"><img src="Images/Bill.png" width="20"> Bills</a>
         <a onclick="goTo('Loan.php')"><img src="Images/Loan.png" width="20"> Loan</a>
@@ -198,21 +207,26 @@
 <!-- =====[ NAVBAR ]===== -->
 <div class="nav-head">
     <div class="menu-icon" onclick="openSidebar()"><img src="Images/Sidebar.png" alt="" width="40"></div>
-        <span class="header-title">Deposit</span>
-        <span class="bell-icon">
-            <img src="Images/Notification.png" alt="notification" width="30">
-        </span>
-    </div>
+    <span class="header-title">Deposit</span>
+    <span class="bell-icon">
+        <img src="Images/Notification.png" alt="notification" width="30">
+    </span>
+</div>
 </div>
 
 <div class="card">
+    <!-- Gold label on top and centered -->
+    <div class="card-label">Deposit Amount</div>
+
     <div class="input-wrap">
-        <div class="label">Deposit Amount</div>
         <input type="number" placeholder="Enter amount">
     </div>
+
     <button>Confirm</button>
 </div>
+
+
+
+<script src="Dashboard.js"></script>
 </body>
-<script src="Dashboard.js">
-</script>
 </html>
