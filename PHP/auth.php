@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Block access if not logged in
 if (!isset($_SESSION['user_id'])) {

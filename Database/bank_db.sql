@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2025 at 06:12 AM
+-- Generation Time: Dec 20, 2025 at 06:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,28 @@ CREATE TABLE `balances` (
 --
 
 INSERT INTO `balances` (`id`, `user_id`, `balance`, `last_updated`) VALUES
-(1, 6, 9400.00, '2025-12-19 05:10:31');
+(1, 6, 9249.35, '2025-12-20 05:43:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bills_payments`
+--
+
+CREATE TABLE `bills_payments` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `bill_name` varchar(100) NOT NULL,
+  `amount` decimal(12,2) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bills_payments`
+--
+
+INSERT INTO `bills_payments` (`id`, `user_id`, `bill_name`, `amount`, `created_at`) VALUES
+(15, 6, 'Water Bill', 150.65, '2025-12-20 13:43:16');
 
 -- --------------------------------------------------------
 
@@ -63,8 +84,9 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `user_id`, `type`, `bank_name`, `to_account`, `to_name`, `amount`, `created_at`) VALUES
-(1, 6, 'BANK', 'BDO', '11111', 'Nathan', 100.00, '2025-12-19 05:10:11'),
-(2, 6, 'INTERNAL', 'BBC', '22222', 'Nat', 200.00, '2025-12-19 05:10:31');
+(7, 6, 'BANK', 'BDO', '0987654321', 'Nathan', 100.00, '2025-12-20 05:42:37'),
+(8, 6, 'INTERNAL', 'BBC', '1231241244', 'Eric', 200.00, '2025-12-20 05:42:52'),
+(9, 6, 'BANK', 'GCash', '444222333666', 'Nat', 300.00, '2025-12-20 05:43:10');
 
 -- --------------------------------------------------------
 
@@ -76,15 +98,31 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `account_number` varchar(20) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `account_number`, `password`) VALUES
-(6, 'John Doe', '1234567890', '$2y$10$qTYgXjgVxjI/C807PblJEu6nfixxJo/EaVVXWH.htYl.6wLLFipai');
+INSERT INTO `users` (`id`, `name`, `account_number`, `password`, `email`) VALUES
+(6, 'John Doe', '1234567890', '$2y$10$qTYgXjgVxjI/C807PblJEu6nfixxJo/EaVVXWH.htYl.6wLLFipai', 'johndoe@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_otp`
+--
+
+CREATE TABLE `user_otp` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `otp_code` varchar(6) NOT NULL,
+  `expires_at` datetime NOT NULL,
+  `is_used` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -94,6 +132,13 @@ INSERT INTO `users` (`id`, `name`, `account_number`, `password`) VALUES
 -- Indexes for table `balances`
 --
 ALTER TABLE `balances`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `bills_payments`
+--
+ALTER TABLE `bills_payments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
@@ -112,6 +157,13 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `account_number` (`account_number`);
 
 --
+-- Indexes for table `user_otp`
+--
+ALTER TABLE `user_otp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -122,16 +174,28 @@ ALTER TABLE `balances`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `bills_payments`
+--
+ALTER TABLE `bills_payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `user_otp`
+--
+ALTER TABLE `user_otp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -144,10 +208,22 @@ ALTER TABLE `balances`
   ADD CONSTRAINT `balances_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `bills_payments`
+--
+ALTER TABLE `bills_payments`
+  ADD CONSTRAINT `bills_payments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
   ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user_otp`
+--
+ALTER TABLE `user_otp`
+  ADD CONSTRAINT `user_otp_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

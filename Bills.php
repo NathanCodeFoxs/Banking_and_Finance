@@ -1,10 +1,51 @@
-<?php require_once __DIR__ . "/PHP/auth.php"; ?>
+<?php
+require_once __DIR__ . "/PHP/auth.php";
+require_once __DIR__ . "/PHP/db.php";
+
+// Get user ID
+$user_id = $_SESSION['user_id'];
+
+// Fetch payment history
+$history_stmt = $conn->prepare("SELECT bill_name, amount, created_at FROM bills_payments WHERE user_id=? ORDER BY created_at DESC");
+$history_stmt->bind_param("i", $user_id);
+$history_stmt->execute();
+$history_result = $history_stmt->get_result();
+$payment_history = $history_result->fetch_all(MYSQLI_ASSOC);
+$history_stmt->close();
+
+// Collect paid bills
+$paid_bills = [];
+foreach($payment_history as $row) {
+    $paid_bills[] = $row['bill_name'];
+}
+
+// Fetch user balance
+$bal_stmt = $conn->prepare("SELECT balance FROM balances WHERE user_id=?");
+$bal_stmt->bind_param("i", $user_id);
+$bal_stmt->execute();
+$bal_stmt->bind_result($balance);
+$bal_stmt->fetch();
+$bal_stmt->close();
+
+$payment_message = '';
+if(isset($_SESSION['payment_error'])) {
+    $payment_message = $_SESSION['payment_error'];
+    unset($_SESSION['payment_error']);
+}
+if(isset($_SESSION['payment_success'])) {
+    $payment_message = $_SESSION['payment_success'];
+    unset($_SESSION['payment_success']);
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Bills</title>
+<link rel="stylesheet" href="Bills.css">
+
 <style>
   * {
     margin: 0;
@@ -289,15 +330,25 @@
     box-shadow: inset 0 1px 3px rgba(255,255,255,0.5);
   }
 
+  .bill-card.paid {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .bill-card.paid .bill-label::after {
+    content: " (Paid)";
+    font-size: 12px;
+    color: #ffd700;
+    font-weight: bold;
+  }
+
 </style>
 </head>
 <body>
-
-<!-- ======[ SIDEBAR ]====== -->
 <div class="header">
 <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
-        <a onclick="goTo('Dashboard.php')" ><img src="Images/home.png" alt="" width="20"> Dashboard</a>
+        <a onclick="goTo('Dashboard.php')"><img src="Images/home.png" alt="" width="20"> Dashboard</a>
         <a onclick="goTo('Transfer.php')"><img src="Images/Transfer.png" width="20"> Transfer</a>
         <a onclick="goTo('Bills.php')"><img src="Images/Bill.png" width="20"> Bills</a>
         <a onclick="goTo('Loan.php')"><img src="Images/Loan.png" width="20"> Loan</a>
@@ -309,89 +360,114 @@
     </div>
 </div>
 
-<!-- =====[ NAVBAR ]===== -->
 <div class="nav-head">
     <div class="menu-icon" onclick="openSidebar()"><img src="Images/Sidebar.png" alt="" width="40"></div>
-        <span class="header-title">Bills</span>
-        <span class="bell-icon">
-            <img src="Images/Notification.png" alt="notification" width="30">
-        </span>
-    </div>
+    <span class="header-title">Bills</span>
+    <span class="bell-icon"><img src="Images/Notification.png" alt="notification" width="30"></span>
+</div>
 </div>
 
-<main>
-  <section class="section">
-    <div class="inner-wrap">
-      <div class="section-header">Payment History</div>
+<?php if($payment_message): ?>
+<script>
+    alert("<?php echo addslashes($payment_message); ?>");
+</script>
+<?php endif; ?>
 
-      <div class="table-wrapper">
+<main>
+<section class="section">
+<div class="inner-wrap">
+
+    <div class="section-header">Payment History</div>
+    <div class="table-wrapper">
         <div class="table-scroll">
-          <table>
+        <table>
             <thead>
-              <tr>
+            <tr>
                 <th>Payment</th>
                 <th>Amount</th>
                 <th>Date</th>
-              </tr>
+            </tr>
             </thead>
             <tbody>
-              <!-- sample rows / blueprint -->
-              <tr><td>Electricity Bill</td><td>1,300.00</td><td>11/28/2025</td></tr>
-              <tr><td>Water Bill</td><td>150.65</td><td>11/20/2025</td></tr>
-              <tr><td>Internet Bill</td><td>6,409.28</td><td>11/18/2025</td></tr>
-              <tr><td>Loan Payment</td><td>2,000.00</td><td>11/15/2025</td></tr>
-              <tr><td>Electricity Bill</td><td>1,280.40</td><td>10/28/2025</td></tr>
-              <tr><td>Water Bill</td><td>145.20</td><td>10/20/2025</td></tr>
-              <tr><td>Internet Bill</td><td>6,300.00</td><td>10/18/2025</td></tr>
-              <tr><td>Loan Payment</td><td>2,000.00</td><td>10/15/2025</td></tr>
+            <?php foreach($payment_history as $row): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['bill_name']); ?></td>
+                    <td>₱ <?php echo number_format($row['amount'],2); ?></td>
+                    <td><?php echo date('m/d/Y', strtotime($row['created_at'])); ?></td>
+                </tr>
+            <?php endforeach; ?>
             </tbody>
-          </table>
+        </table>
         </div>
-      </div>
-
-      <div class="pay-options-header-wrap">
-        <div class="pay-options-header">Payment Options</div>
-      </div>
-
-      <div class="cards-row">
-        <div class="bill-card">
-          <div class="bill-card-top">
-            <div class="bill-icon tap"><img src="Images/Water.png"></div>
-            <div class="bill-label">Water Bill</div>
-          </div>
-          <div class="bill-amount">₱ 150.65</div>
-        </div>
-
-        <div class="bill-card">
-          <div class="bill-card-top">
-            <div class="bill-icon bulb"><img src="Images/Electricity.png"></div>
-            <div class="bill-label">Electricity Bill</div>
-          </div>
-          <div class="bill-amount">₱ 1409.28</div>
-        </div>
-
-        <div class="bill-card">
-          <div class="bill-card-top">
-            <div class="bill-icon wifi"><img src="Images/Wifi.png"></div>
-            <div class="bill-label">Internet Bill</div>
-          </div>
-          <div class="bill-amount">₱ 6409.28</div>
-        </div>
-
-        <div class="bill-card">
-          <div class="bill-card-top">
-            <div class="bill-icon loan"><img src="Images/Loan.png"></div>
-            <div class="bill-label">Loan Bill</div>
-          </div>
-          <div class="bill-amount">₱ 0</div>
-        </div>
-      </div>
     </div>
-  </section>
+
+    <div class="pay-options-header-wrap">
+        <div class="pay-options-header">Payment Options</div>
+    </div>
+
+    <div class="cards-row">
+
+    <?php
+    // Define bills and amounts
+    $bills = [
+        ['name'=>'Water Bill','icon'=>'Images/Water.png','amount'=>150.65],
+        ['name'=>'Electricity Bill','icon'=>'Images/Electricity.png','amount'=>1409.28],
+        ['name'=>'Internet Bill','icon'=>'Images/Wifi.png','amount'=>6409.28],
+        ['name'=>'Loan Bill','icon'=>'Images/Loan.png','amount'=>2000.00],
+    ];
+
+    foreach($bills as $bill):
+        $is_paid = in_array($bill['name'], $paid_bills);
+    ?>
+        <div class="bill-card <?php echo $is_paid ? 'paid' : ''; ?>">
+            <div class="bill-card-top">
+                <div class="bill-icon"><img src="<?php echo $bill['icon']; ?>"></div>
+                <div class="bill-label"><?php echo $bill['name']; ?></div>
+            </div>
+            <div class="bill-amount">₱ <?php echo number_format($bill['amount'],2); ?></div>
+
+            <!-- Hidden form for payment -->
+            <form method="POST" action="PHP/process_bill_payment.php">
+                <input type="hidden" name="bill_name" value="<?php echo $bill['name']; ?>">
+                <input type="hidden" name="amount" value="<?php echo $bill['amount']; ?>">
+                <button type="submit" style="display:none;" <?php echo $is_paid ? 'disabled' : ''; ?>></button>
+            </form>
+        </div>
+    <?php endforeach; ?>
+
+    </div>
+
+    <p style="margin-top:20px; font-weight:bold; text-align:center;">Available Balance: ₱ <?php echo number_format($balance,2); ?></p>
+
+</div>
+</section>
 </main>
 
-</body>
-<script src="Dashboard.js">
+<script>
+document.querySelectorAll('.bill-card').forEach(card => {
+    if(card.classList.contains('paid')) return; // skip already paid
 
+    card.addEventListener('click', () => {
+        const billName = card.querySelector('.bill-label').innerText;
+        const amount = card.querySelector('input[name="amount"]').value;
+        const confirmPay = confirm(`Are you sure you want to pay ${billName} of ₱${parseFloat(amount).toFixed(2)}?`);
+        if(confirmPay){
+            card.querySelector('button').click();
+        }
+    });
+});
+
+function openSidebar(){ 
+    document.getElementById('sidebar').style.left='0'; 
+    document.getElementById('sidebarBg').style.width='100%'; 
+}
+function closeSidebar(){ 
+    document.getElementById('sidebar').style.left='-280px'; 
+    document.getElementById('sidebarBg').style.width='0'; 
+}
+function goTo(url){ 
+    window.location.href=url; 
+}
 </script>
+</body>
 </html>
