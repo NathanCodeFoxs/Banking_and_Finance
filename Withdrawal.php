@@ -1,4 +1,46 @@
-<?php require_once __DIR__ . "/PHP/auth.php"; ?>
+<?php
+require_once __DIR__ . "/PHP/auth.php";
+require_once __DIR__ . "/PHP/db.php";
+
+$user_id = $_SESSION['user_id'];
+
+// Handle POST submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $withdraw_amount = isset($_POST['amount']) ? floatval($_POST['amount']) : 0;
+
+    // Fetch current balance
+    $stmt = $conn->prepare("SELECT balance FROM balances WHERE user_id=?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($balance);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($withdraw_amount <= 0) {
+        $_SESSION['withdraw_error'] = "Enter a valid amount!";
+    } elseif ($withdraw_amount > $balance) {
+        $_SESSION['withdraw_error'] = "Insufficient balance!";
+    } else {
+        // Deduct balance
+        $stmt = $conn->prepare("UPDATE balances SET balance = balance - ? WHERE user_id=?");
+        $stmt->bind_param("di", $withdraw_amount, $user_id);
+        $stmt->execute();
+        $stmt->close();
+
+        $_SESSION['withdraw_success'] = "Successfully withdrew ₱" . number_format($withdraw_amount, 2);
+    }
+    header("Location: Withdrawal.php");
+    exit();
+}
+
+// Fetch current balance for display
+$stmt = $conn->prepare("SELECT balance FROM balances WHERE user_id=?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($balance);
+$stmt->fetch();
+$stmt->close();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -178,10 +220,9 @@
     }
 </style>
 </head>
-
 <body>
 
-<!-- ======[ SIDEBAR ]====== -->
+<!-- ======[ SIDEBAR + NAVBAR ]====== -->
 <div class="header">
 <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
@@ -196,29 +237,41 @@
     </div>
 </div>
 
-<!-- =====[ NAVBAR ]===== -->
 <div class="nav-head">
     <div class="menu-icon" onclick="openSidebar()"><img src="Images/Sidebar.png" alt="" width="40"></div>
-        <span class="header-title">Withdrawal</span>
-        <span class="bell-icon">
-            <img src="Images/Notification.png" alt="notification" width="30">
-        </span>
-    </div>
+    <span class="header-title">Withdrawal</span>
+    <span class="bell-icon"><img src="Images/Notification.png" alt="notification" width="30"></span>
+</div>
 </div>
 
+<!-- ======[ WITHDRAWAL CARD ]===== -->
 <div class="card">
+
+    <?php
+    if (!empty($_SESSION['withdraw_error'])) {
+        echo "<p style='color:red; text-align:center;'>".$_SESSION['withdraw_error']."</p>";
+        unset($_SESSION['withdraw_error']);
+    }
+    if (!empty($_SESSION['withdraw_success'])) {
+        echo "<p style='color:green; text-align:center;'>".$_SESSION['withdraw_success']."</p>";
+        unset($_SESSION['withdraw_success']);
+    }
+    ?>
+
     <div class="balance-box">
         <div class="balance-label">AVAILABLE BALANCE</div>
-        <div class="balance-value" id="balance">₱ 10,000.00</div>
+        <div class="balance-value">₱ <?php echo number_format($balance,2); ?></div>
     </div>
 
-    <div class="input-wrap">
-        <div class="label">Withdrawal Amount</div>
-        <input type="number" placeholder="Enter amount">
-    </div>
-
-    <button>Confirm</button>
+    <form method="POST">
+        <div class="input-wrap">
+            <div class="label">Withdrawal Amount</div>
+            <input type="number" name="amount" placeholder="Enter amount" step="0.01" min="0.01" required>
+        </div>
+        <button type="submit">Confirm</button>
+    </form>
 </div>
-</body>
+
 <script src="Dashboard.js"></script>
+</body>
 </html>
