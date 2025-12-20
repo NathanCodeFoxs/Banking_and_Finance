@@ -341,6 +341,24 @@ if(isset($_SESSION['payment_success'])) {
     color: #ffd700;
     font-weight: bold;
   }
+  
+  .balance-oval {
+    padding: 20px 40px;
+    background: #AC8F45;
+    border-radius: 50px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    display: inline-block;
+  }
+
+  .balance-oval span {
+    font-weight: bold;
+    font-size: 24px;
+  }
+
 
 </style>
 </head>
@@ -400,6 +418,13 @@ if(isset($_SESSION['payment_success'])) {
         </div>
     </div>
 
+  <!-- GOLD OVAL BALANCE -->
+  <div style="width: 100%; text-align: center; margin: 40px 0;">
+      <div class="balance-oval">
+          Available Balance: <span>₱ <?php echo number_format($balance,2); ?></span>
+      </div>
+  </div>
+
     <div class="pay-options-header-wrap">
         <div class="pay-options-header">Payment Options</div>
     </div>
@@ -434,9 +459,6 @@ if(isset($_SESSION['payment_success'])) {
     <?php endforeach; ?>
 
     </div>
-
-    <p style="margin-top:20px; font-weight:bold; text-align:center;">Available Balance: ₱ <?php echo number_format($balance,2); ?></p>
-
 </div>
 </section>
 </main>

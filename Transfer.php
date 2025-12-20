@@ -4,6 +4,7 @@ require_once __DIR__ . "/PHP/db.php";
 
 $user_id = $_SESSION['user_id'];
 
+// Get transactions
 $stmt = $conn->prepare("
 SELECT bank_name, to_account, to_name, amount, created_at
 FROM transactions
@@ -13,6 +14,14 @@ ORDER BY created_at DESC
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
+
+// Get user balance
+$bal_stmt = $conn->prepare("SELECT balance FROM balances WHERE user_id = ?");
+$bal_stmt->bind_param("i", $user_id);
+$bal_stmt->execute();
+$bal_stmt->bind_result($balance);
+$bal_stmt->fetch();
+$bal_stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -334,6 +343,23 @@ $result = $stmt->get_result();
     background: #10303a;
 }
 
+  .balance-oval {
+    padding: 20px 40px;
+    background: #AC8F45;
+    border-radius: 50px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    display: inline-block;
+  }
+
+  .balance-oval span {
+    font-weight: bold;
+    font-size: 24px;
+  }
+
 </style>
 </head>
 <body>
@@ -392,6 +418,13 @@ $result = $stmt->get_result();
     </table>
 </div>
 </div>
+
+  <!-- GOLD OVAL BALANCE -->
+  <div style="width: 100%; text-align: center; margin: 40px 0;">
+      <div class="balance-oval">
+          Available Balance: <span>₱ <?php echo number_format($balance,2); ?></span>
+      </div>
+  </div>
 
 <!-- TRANSFER OPTIONS -->
 <div class="pay-options-header-wrap">
