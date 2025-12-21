@@ -1,11 +1,58 @@
-<?php require_once __DIR__ . "/PHP/auth.php"; ?>
+<?php
+require_once __DIR__ . "/PHP/auth.php";
+require_once __DIR__ . "/PHP/db.php";
+
+$user_id = $_SESSION['user_id'];
+
+/* ===== FETCH USER DATA ===== */
+$stmt = $conn->prepare("SELECT email, phone_number FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($email, $phone);
+$stmt->fetch();
+$stmt->close();
+
+$email = $email ?? "";
+$phone = $phone ?? "";
+
+/* ===== HANDLE UPDATES ===== */
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    /* CHANGE PASSWORD */
+    if (isset($_POST['new_password'])) {
+        $hashed = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
+        $stmt->bind_param("si", $hashed, $user_id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    /* CHANGE PHONE */
+    if (isset($_POST['new_phone'])) {
+        $stmt = $conn->prepare("UPDATE users SET phone_number = ? WHERE id = ?");
+        $stmt->bind_param("si", $_POST['new_phone'], $user_id);
+        $stmt->execute();
+        $stmt->close();
+        $phone = $_POST['new_phone'];
+    }
+
+    /* CHANGE EMAIL */
+    if (isset($_POST['new_email'])) {
+        $stmt = $conn->prepare("UPDATE users SET email = ? WHERE id = ?");
+        $stmt->bind_param("si", $_POST['new_email'], $user_id);
+        $stmt->execute();
+        $stmt->close();
+        $email = $_POST['new_email'];
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Settings - BBC</title>
+<meta charset="UTF-8">
+<title>Profile Settings - BBC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * {
             margin: 0;
@@ -236,166 +283,80 @@
 </head>
 <body>
 
-    <!-- =====[ NAVBAR ]===== -->
-    <div class="header">
-        <div class="menu-icon" onclick="window.location.href='Profile_Info.html'">
-            <img src="Images/home.png" alt="" width="40">
-        </div>
-        <img src="Images/logo.png" alt="company logo" class="header-logo">
-        <p class="acro_compa">BBC</p>
-        <span>
-            <img src="Images/Notification.png" alt="notification" width="30">
-        </span>
+<!-- ===== NAVBAR ===== -->
+<div class="header">
+    <div class="menu-icon" onclick="window.location.href='Profile_Info.php'">
+        <img src="Images/home.png" width="40">
     </div>
+    <img src="Images/logo.png" class="header-logo">
+    <p class="acro_compa">BBC</p>
+</div>
 
-    <!-- =====[ CONTENT ]===== -->
-    <div class="content-wrapper">
-        <h1 class="page-title">PROFILE SETTINGS</h1>
+<div class="content-wrapper">
+<h1 class="page-title">PROFILE SETTINGS</h1>
 
-        <div class="settings-card">
-            <div class="field-group">
-                <div class="field-label">PASSWORD</div>
-                <input type="password" class="field-value" value="***************************" readonly>
-                <button class="change-btn" onclick="openPasswordPopup()">Change</button>
-            </div>
+<div class="settings-card">
 
-            <div class="field-group">
-                <div class="field-label">PHONE NUMBER</div>
-                <input type="text" class="field-value" id="phoneInput" value="0921 514 2155" readonly>
-                <button class="change-btn" onclick="openPhonePopup()">Change</button>
-            </div>
+<!-- PASSWORD -->
+<div class="field-group">
+    <div class="field-label">PASSWORD</div>
+    <input type="password" class="field-value" value="************" readonly>
+    <button class="change-btn" onclick="openPasswordPopup()">Change</button>
+</div>
 
-            <div class="field-group">
-                <div class="field-label">PIN</div>
-                <input type="password" class="field-value" id="pinInput" value="0000" readonly>
-                <button class="change-btn" onclick="openPinPopup()">Change</button>
-            </div>
+<!-- PHONE -->
+<div class="field-group">
+    <div class="field-label">PHONE NUMBER</div>
+    <input class="field-value" value="<?= htmlspecialchars($phone) ?>" readonly>
+    <button class="change-btn" onclick="openPhonePopup()">Change</button>
+</div>
 
-            <div class="field-group">
-                <div class="field-label">EMAIL</div>
-                <input type="email" class="field-value" id="emailInput" value="drdizalthe2nd@gmail.com" readonly>
-                <button class="change-btn" onclick="openEmailPopup()">Change</button>
-            </div>
-        </div>
-    </div>
+<!-- EMAIL -->
+<div class="field-group">
+    <div class="field-label">EMAIL</div>
+    <input class="field-value" value="<?= htmlspecialchars($email) ?>" readonly>
+    <button class="change-btn" onclick="openEmailPopup()">Change</button>
+</div>
 
-    <!-- ===== PASSWORD POPUP ===== -->
-    <div class="popup-bg" id="passwordPopup">
-        <div class="popup-box">
-            <h3>Change Password</h3>
-            <input type="password" id="newPassword" placeholder="Enter new password">
-            <br>
-            <button onclick="submitPassword()">Submit</button>
-            <button class="cancel" onclick="closePopup('passwordPopup')">Cancel</button>
-        </div>
-    </div>
+</div>
+</div>
 
-    <!-- ===== PHONE POPUP ===== -->
-    <div class="popup-bg" id="phonePopup">
-        <div class="popup-box">
-            <h3>Change Phone Number</h3>
-            <input type="text" id="newPhone" placeholder="Enter new phone number">
-            <br>
-            <button onclick="submitPhone()">Submit</button>
-            <button class="cancel" onclick="closePopup('phonePopup')">Cancel</button>
-        </div>
-    </div>
+<!-- ===== PASSWORD POPUP ===== -->
+<div class="popup-bg" id="passwordPopup">
+<form method="POST" class="popup-box">
+    <h3>Change Password</h3>
+    <input type="password" name="new_password" required>
+    <button type="submit">Submit</button>
+    <button type="button" class="cancel" onclick="closePopup('passwordPopup')">Cancel</button>
+</form>
+</div>
 
-    <!-- ===== PIN POPUP ===== -->
-    <div class="popup-bg" id="pinPopup">
-        <div class="popup-box">
-            <h3>Change PIN</h3>
-            <input type="password" id="newPin" placeholder="Enter 4-digit PIN" maxlength="4">
-            <br>
-            <button onclick="submitPin()">Submit</button>
-            <button class="cancel" onclick="closePopup('pinPopup')">Cancel</button>
-        </div>
-    </div>
+<!-- ===== PHONE POPUP ===== -->
+<div class="popup-bg" id="phonePopup">
+<form method="POST" class="popup-box">
+    <h3>Change Phone</h3>
+    <input type="text" name="new_phone" required>
+    <button type="submit">Submit</button>
+    <button type="button" class="cancel" onclick="closePopup('phonePopup')">Cancel</button>
+</form>
+</div>
 
-    <!-- ===== EMAIL POPUP ===== -->
-    <div class="popup-bg" id="emailPopup">
-        <div class="popup-box">
-            <h3>Change Email</h3>
-            <input type="email" id="newEmail" placeholder="Enter new email">
-            <br>
-            <button onclick="submitEmail()">Submit</button>
-            <button class="cancel" onclick="closePopup('emailPopup')">Cancel</button>
-        </div>
-    </div>
+<!-- ===== EMAIL POPUP ===== -->
+<div class="popup-bg" id="emailPopup">
+<form method="POST" class="popup-box">
+    <h3>Change Email</h3>
+    <input type="email" name="new_email" required>
+    <button type="submit">Submit</button>
+    <button type="button" class="cancel" onclick="closePopup('emailPopup')">Cancel</button>
+</form>
+</div>
 
-    <script>
-        function openPasswordPopup() {
-            document.getElementById('passwordPopup').style.display = 'flex';
-        }
-
-        function openPhonePopup() {
-            document.getElementById('phonePopup').style.display = 'flex';
-        }
-
-        function openPinPopup() {
-            document.getElementById('pinPopup').style.display = 'flex';
-        }
-
-        function openEmailPopup() {
-            document.getElementById('emailPopup').style.display = 'flex';
-        }
-
-        function closePopup(popupId) {
-            document.getElementById(popupId).style.display = 'none';
-        }
-
-        function submitPassword() {
-            const newPassword = document.getElementById('newPassword').value;
-            if (newPassword) {
-                alert('Password changed successfully!');
-                closePopup('passwordPopup');
-            } else {
-                alert('Please enter a password');
-            }
-        }
-
-        function submitPhone() {
-            const newPhone = document.getElementById('newPhone').value;
-            if (newPhone) {
-                document.getElementById('phoneInput').value = newPhone;
-                alert('Phone number updated successfully!');
-                closePopup('phonePopup');
-            } else {
-                alert('Please enter a phone number');
-            }
-        }
-
-        function submitPin() {
-            const newPin = document.getElementById('newPin').value;
-            if (newPin.length === 4) {
-                document.getElementById('pinInput').value = newPin;
-                alert('PIN changed successfully!');
-                closePopup('pinPopup');
-            } else {
-                alert('PIN must be exactly 4 digits');
-            }
-        }
-
-        function submitEmail() {
-            const newEmail = document.getElementById('newEmail').value;
-            if (newEmail && newEmail.includes('@')) {
-                document.getElementById('emailInput').value = newEmail;
-                alert('Email updated successfully!');
-                closePopup('emailPopup');
-            } else {
-                alert('Please enter a valid email address');
-            }
-        }
-
-        // Close popup when clicking outside
-        document.querySelectorAll('.popup-bg').forEach(popup => {
-            popup.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.style.display = 'none';
-                }
-            });
-        });
-    </script>
+<script>
+function openPasswordPopup(){passwordPopup.style.display='flex'}
+function openPhonePopup(){phonePopup.style.display='flex'}
+function openEmailPopup(){emailPopup.style.display='flex'}
+function closePopup(id){document.getElementById(id).style.display='none'}
+</script>
 
 </body>
 </html>
