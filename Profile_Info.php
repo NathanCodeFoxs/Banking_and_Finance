@@ -1,4 +1,24 @@
-<?php require_once __DIR__ . "/PHP/auth.php"; ?>
+<?php
+require_once __DIR__ . "/PHP/auth.php";
+require_once __DIR__ . "/PHP/db.php";
+
+$user_id = $_SESSION['user_id'];
+
+$stmt = $conn->prepare("
+    SELECT name, account_number
+    FROM users
+    WHERE id = ?
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->bind_result($name, $account_number);
+$stmt->fetch();
+$stmt->close();
+
+// Safety fallback
+$name = $name ?? "N/A";
+$account_number = $account_number ?? "N/A";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -169,18 +189,14 @@
         <h1 class="page-title">PROFILE INFO</h1>
 
         <div class="profile-card">
-            <div class="profile-avatar">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230d4d56'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Profile">
-            </div>
-
             <div class="field-group">
                 <div class="field-label">ACCOUNT NAME</div>
-                <div class="field-value">Jake</div>
+                <div class="field-value"><?= htmlspecialchars($name) ?></div>
             </div>
 
             <div class="field-group">
                 <div class="field-label">ACCOUNT NUMBER</div>
-                <div class="field-value">09235212104</div>
+                <div class="field-value"><?= htmlspecialchars($account_number) ?></div>
             </div>
         </div>
     </div>
