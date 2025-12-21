@@ -1,5 +1,10 @@
 <?php require_once __DIR__ . "/PHP/auth.php"; ?>
 
+<?php
+$error_msg = $_GET['error'] ?? '';
+$success_msg = $_GET['success'] ?? '';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,29 +102,57 @@
     .confirm-btn:hover {
         opacity: 0.9;
     }
+/* POPUP STYLES */
+#popup {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    justify-content:center;
+    align-items:center;
+    z-index:100;
+}
+
+#popup-box {
+    background:#0b2931;
+    padding:30px;
+    border-radius:12px;
+    border:2px solid #ac8f45;
+    color:white;
+    text-align:center;
+    max-width:400px;
+}
+#popup-box button {
+    margin-top:20px;
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    background:#ac8f45;
+    color:white;
+    cursor:pointer;
+}
+    
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <div class="header">
-
     <a href="Transfer.php" class="header-img-btn left-btn">
         <img src="Images/Money_Transfer.png" alt="Back">
     </a>
-
     <span class="header-title">Money Transfer</span>
-
     <span class="header-img-btn right-btn">
         <img src="Images/Notification.png" alt="Notification">
     </span>
-
 </div>
 
 <!-- TRANSFER FORM -->
 <div class="frame">
 <form action="PHP/process_money_transfer.php" method="POST">
-
     <label>Recipient Account Number</label>
     <input type="text" name="to_account" required>
 
@@ -130,9 +163,36 @@
     <input type="number" name="amount" min="1" required>
 
     <button type="submit" class="confirm-btn">Confirm</button>
-
 </form>
 </div>
+
+<!-- POPUP -->
+<div id="popup">
+    <div id="popup-box">
+        <span id="popup-text"></span><br>
+        <button onclick="document.getElementById('popup').style.display='none'">OK</button>
+    </div>
+</div>
+
+<script>
+const errorMsg = "<?= htmlspecialchars($error_msg) ?>";
+const successMsg = "<?= htmlspecialchars($success_msg) ?>";
+
+function showPopup(msg) {
+    const popup = document.getElementById('popup');
+    document.getElementById('popup-text').innerText = msg;
+    popup.style.display = 'flex';
+}
+
+// Only show popup if redirected with a message
+if (errorMsg && errorMsg.trim() !== "") {
+    showPopup(errorMsg);
+    window.history.replaceState({}, document.title, "<?= basename($_SERVER['PHP_SELF']) ?>");
+} else if (successMsg && successMsg.trim() !== "") {
+    showPopup(successMsg);
+    window.history.replaceState({}, document.title, "<?= basename($_SERVER['PHP_SELF']) ?>");
+}
+</script>
 
 </body>
 </html>

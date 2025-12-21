@@ -115,7 +115,6 @@
 
 <!-- HEADER WITH BUTTONS -->
 <div class="header">
-
     <a href="Transfer.php" class="header-img-btn left-btn">
         <img src="Images/Bank_Transfer.png" alt="Left Button">
     </a>
@@ -125,7 +124,6 @@
     <a href="#" class="header-img-btn right-btn">
         <img src="Images/Notification.png" alt="Right Button">
     </a>
-
 </div>
 
 <!-- TRANSFER FORM FRAME -->
@@ -139,11 +137,11 @@
         <option value="GCash">GCash</option>
     </select>
 
-    <label>Account Number</label>
-    <input type="text" name="to_account" required>
-
     <label>Account Name</label>
     <input type="text" name="to_name" required>
+
+    <label>Account Number</label>
+    <input type="text" name="to_account" required>
 
     <label>Money Amount</label>
     <input type="number" name="amount" min="1" required>

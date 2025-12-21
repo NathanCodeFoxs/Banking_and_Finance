@@ -1,12 +1,12 @@
 <?php
 require_once __DIR__ . '/env.php';
 
-// Validate encryption environment variable
-if (!getenv('ENCRYPTION_KEY')) {
-    die('Encryption environment variable ENCRYPTION_KEY is not set.');
+// Validate encryption environment variables
+if (!getenv('ENCRYPTION_KEY') || !getenv('ENCRYPTION_IV')) {
+    die('Encryption environment variables are not set.');
 }
 
-// Define constant
+// Define constants
 define('ENCRYPTION_KEY', hash('sha256', getenv('ENCRYPTION_KEY'), true));
 
 /**

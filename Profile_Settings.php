@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/PHP/auth.php";
 require_once __DIR__ . "/PHP/db.php";
+require_once __DIR__ . "/PHP/encryption.php"; // Include encryption functions
 
 $user_id = $_SESSION['user_id'];
 
@@ -8,12 +9,13 @@ $user_id = $_SESSION['user_id'];
 $stmt = $conn->prepare("SELECT email, phone_number FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
-$stmt->bind_result($email, $phone);
+$stmt->bind_result($enc_email, $enc_phone);
 $stmt->fetch();
 $stmt->close();
 
-$email = $email ?? "";
-$phone = $phone ?? "";
+// Decrypt email and phone
+$email = decryptData($enc_email) ?? "";
+$phone = decryptData($enc_phone) ?? "";
 
 /* ===== HANDLE UPDATES ===== */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,20 +31,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     /* CHANGE PHONE */
     if (isset($_POST['new_phone'])) {
+        $encrypted_phone = encryptData($_POST['new_phone']);
         $stmt = $conn->prepare("UPDATE users SET phone_number = ? WHERE id = ?");
-        $stmt->bind_param("si", $_POST['new_phone'], $user_id);
+        $stmt->bind_param("si", $encrypted_phone, $user_id);
         $stmt->execute();
         $stmt->close();
-        $phone = $_POST['new_phone'];
+        $phone = $_POST['new_phone']; // Update local variable for display
     }
 
     /* CHANGE EMAIL */
     if (isset($_POST['new_email'])) {
+        $encrypted_email = encryptData($_POST['new_email']);
         $stmt = $conn->prepare("UPDATE users SET email = ? WHERE id = ?");
-        $stmt->bind_param("si", $_POST['new_email'], $user_id);
+        $stmt->bind_param("si", $encrypted_email, $user_id);
         $stmt->execute();
         $stmt->close();
-        $email = $_POST['new_email'];
+        $email = $_POST['new_email']; // Update local variable for display
     }
 }
 ?>
@@ -293,8 +297,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <div class="content-wrapper">
-
-
 <div class="settings-card">
 
 <!-- PASSWORD -->
