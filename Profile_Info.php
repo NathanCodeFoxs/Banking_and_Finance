@@ -26,6 +26,7 @@ $account_number = $account_number ?? "N/A";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Info - BBC</title>
+    <link rel="stylesheet" href="logout-modal.css">
     <style>
         * {
             margin: 0;
@@ -239,6 +240,8 @@ $account_number = $account_number ?? "N/A";
     height: 80px;
     margin: 10px 10px;
 }
+
+
     </style>
 </head>
 <body>
@@ -255,7 +258,7 @@ $account_number = $account_number ?? "N/A";
         <a onclick="goTo('Withdrawal.php')"><img src="Images/Safe_Out.png" width="20"> Withdrawal</a>
         <a onclick="goTo('Finance.php')"><img src="Images/Finance.png" width="20"> Finance</a>
         <a onclick="goTo('Profile_Info.php')"><img src="Images/Setting.png" alt="" width="20"> Settings</a>
-        <a onclick="goTo('PHP/logout.php')"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
+        <a onclick="confirmLogout()"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
     </div>
 </div>
 
@@ -287,6 +290,29 @@ $account_number = $account_number ?? "N/A";
         </div>
     </div>
 
+    <!-- LOGOUT MODAL -->
+    <div id="logoutModal" class="logout-modal">
+        <div class="logout-box">
+            <h2>Logout Confirmation</h2>
+            <p>Are you sure you want to log out?</p>
+            <div class="logout-actions">
+                <button onclick="doLogout()">Logout</button>
+                <button onclick="closeLogout()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script src="Dashboard.js"></script>
+
+    <!-- prevent back button after logout -->
+    <script>
+    window.onload = function() {
+        history.pushState(null, null, location.href);
+        window.onpopstate = function() {
+            // If somehow the user goes back, force redirect
+            window.location.href = 'Login.php';
+        };
+    };
+</script>   
+
 </body>
-<script src="Dashboard.js"></script>
 </html>

@@ -1,0 +1,64 @@
+/* ===== LOGOUT MODAL (GLOBAL) ===== */
+
+.logout-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    font-family: "Times New Roman", serif;
+}
+
+.logout-box {
+    background: #0b2931;
+    color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    text-align: center;
+    width: 360px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.logout-box h2 {
+    margin-bottom: 12px;
+    color: #ac8f45;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logout-box p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.logout-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.logout-actions button {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.logout-actions button:first-child {
+    background: #ac8f45;
+    color: #000;
+}
+
+.logout-actions button:last-child {
+    background: #444;
+    color: #fff;
+}
+
+.logout-actions button:hover {
+    opacity: 0.9;
+}

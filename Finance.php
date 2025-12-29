@@ -41,10 +41,12 @@ $taxPlanning += $roundingFix;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Finance</title>
+  <link rel="stylesheet" href="logout-modal.css">
+
   <style>
     /* Global font + background */
     body {
-      font-family: "Georgia", "Times New Roman", serif;
+      font-family: "Times New Roman", serif;
       margin: 0;
       background: linear-gradient(90deg, #134E5E 39%, #0B3037 95%);
       color: #FFFFFF;
@@ -57,7 +59,7 @@ $taxPlanning += $roundingFix;
       justify-content: center;
       align-items: center;
       font-size: 34px;
-      font-weight: bold;
+      font-weight: none;
       position: relative;
     }
 
@@ -116,7 +118,7 @@ $taxPlanning += $roundingFix;
       font-size: 18px; /* unified font size */
       text-decoration: none;
       cursor: pointer;
-      font-family: "Georgia", "Times New Roman", serif;
+      font-family: "Times New Roman", serif;
     }
 
     .sidebar img {
@@ -185,11 +187,15 @@ $taxPlanning += $roundingFix;
       font-size: 22px; /* highlight total */
       color: #AC8F45;
     }
+
+
   </style>
 </head>
 <body>
 
 <!-- ======[ SIDEBAR ]====== -->
+
+<!-- HELLO, PAAYOS NG SIZE NG FONT SA SIDEBAR, mas maliit dito sa finance compared sa iba e, di ko rin magawa sry -->
 <div class="header">
   <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
@@ -200,7 +206,7 @@ $taxPlanning += $roundingFix;
       <a onclick="goTo('Withdrawal.php')"><img src="Images/Safe_Out.png" width="20"> Withdrawal</a>
       <a onclick="goTo('Finance.php')"><img src="Images/Finance.png" width="20"> Finance</a>
       <a onclick="goTo('Profile_Info.php')"><img src="Images/Setting.png" alt="" width="20"> Settings</a>
-      <a onclick="goTo('PHP/logout.php')"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
+      <a onclick="confirmLogout()"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
     </div>
   </div>
 
@@ -247,6 +253,32 @@ $taxPlanning += $roundingFix;
   </table>
 </div>
 
+
+<!-- LOGOUT MODAL -->
+<div id="logoutModal" class="logout-modal">
+    <div class="logout-box">
+        <h2>Logout Confirmation</h2>
+        <p>Are you sure you want to log out?</p>
+        <div class="logout-actions">
+            <button onclick="doLogout()">Logout</button>
+            <button onclick="closeLogout()">Cancel</button>
+        </div>
+    </div>
+</div>
 <script src="Dashboard.js"></script>
+
+<!-- prevent back button after logout -->
+<script>
+window.onload = function() {
+    history.pushState(null, null, location.href);
+    window.onpopstate = function() {
+        // If somehow the user goes back, force redirect
+        window.location.href = 'Login.php';
+    };
+};
+</script>
+
+
+
 </body>
 </html>

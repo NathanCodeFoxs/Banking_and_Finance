@@ -38,6 +38,8 @@ $stmt->close();
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deposit</title>
+<link rel="stylesheet" href="logout-modal.css">
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Georgia", "Times New Roman", serif; }
 
@@ -123,7 +125,7 @@ input {
     outline: none;
 }
 
-button {
+.card form button {
     width: 80%;
     padding: 13px 0;
     background: #AC8F45;
@@ -179,6 +181,7 @@ button {
 .menu-icon { font-size: 32px; cursor: pointer; color: white; margin-left: 20px; }
 .bell-icon { margin-right: 20px; visibility: hidden;}
 
+
 </style>
 </head>
 <body>
@@ -194,7 +197,7 @@ button {
         <a onclick="goTo('Withdrawal.php')"><img src="Images/Safe_Out.png" width="20"> Withdrawal</a>
         <a onclick="goTo('Finance.php')"><img src="Images/Finance.png" width="20"> Finance</a>
         <a onclick="goTo('Profile_Info.php')"><img src="Images/Setting.png" alt="" width="20"> Settings</a>
-        <a onclick="goTo('PHP/logout.php')"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
+        <a onclick="confirmLogout()"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
     </div>
 </div>
 
@@ -232,18 +235,28 @@ if (!empty($_SESSION['deposit_success'])) {
 </form>
 </div>
 
+<!-- LOGOUT MODAL -->
+<div id="logoutModal" class="logout-modal">
+    <div class="logout-box">
+        <h2>Logout Confirmation</h2>
+        <p>Are you sure you want to log out?</p>
+        <div class="logout-actions">
+            <button onclick="doLogout()">Logout</button>
+            <button onclick="closeLogout()">Cancel</button>
+        </div>
+    </div>
+</div>
+<script src="Dashboard.js"></script>
+
+<!-- prevent back button after logout -->
 <script>
-function openSidebar(){ 
-    document.getElementById('sidebar').style.left='0'; 
-    document.getElementById('sidebarBg').style.width='100%'; 
-}
-function closeSidebar(){ 
-    document.getElementById('sidebar').style.left='-280px'; 
-    document.getElementById('sidebarBg').style.width='0'; 
-}
-function goTo(url){ 
-    window.location.href=url; 
-}
+window.onload = function() {
+    history.pushState(null, null, location.href);
+    window.onpopstate = function() {
+        // If somehow the user goes back, force redirect
+        window.location.href = 'Login.php';
+    };
+};
 </script>
 
 </body>

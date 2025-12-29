@@ -56,7 +56,7 @@ $success_msg = $_GET['success'] ?? '';
     }
 
     .left-btn { left: 15px; }
-    .right-btn { right: 15px; }
+    .right-btn { right: 15px; visibility: hidden;}
 
     /* FORM FRAME */
     .frame {

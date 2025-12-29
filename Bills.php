@@ -45,13 +45,14 @@ if(isset($_SESSION['payment_success'])) {
 <meta charset="UTF-8">
 <title>Bills</title>
 <link rel="stylesheet" href="Bills.css">
+<link rel="stylesheet" href="logout-modal.css">
 
 <style>
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Georgia", "Times New Roman", serif;
+    font-family: "Times New Roman", serif;
   }
 
   body {
@@ -374,7 +375,7 @@ if(isset($_SESSION['payment_success'])) {
         <a onclick="goTo('Withdrawal.php')"><img src="Images/Safe_Out.png" width="20"> Withdrawal</a>
         <a onclick="goTo('Finance.php')"><img src="Images/Finance.png" width="20"> Finance</a>
         <a onclick="goTo('Profile_Info.php')"><img src="Images/Setting.png" alt="" width="20"> Settings</a>
-        <a onclick="goTo('PHP/logout.php')"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
+        <a onclick="confirmLogout()"><img src="Images/Logout.png" alt="" width="20"> Logout</a>
     </div>
 </div>
 
@@ -465,18 +466,32 @@ if(isset($_SESSION['payment_success'])) {
 </main>
 
 <script>
+let selectedForm = null;
+
 document.querySelectorAll('.bill-card').forEach(card => {
-    if(card.classList.contains('paid')) return; // skip already paid
+    if (card.classList.contains('paid')) return;
 
     card.addEventListener('click', () => {
+        selectedForm = card.querySelector('form');
+
         const billName = card.querySelector('.bill-label').innerText;
-        const amount = card.querySelector('input[name="amount"]').value;
-        const confirmPay = confirm(`Are you sure you want to pay ${billName} of ₱${parseFloat(amount).toFixed(2)}?`);
-        if(confirmPay){
-            card.querySelector('button').click();
-        }
+        const amount = selectedForm.querySelector('input[name="amount"]').value;
+
+        document.getElementById('paymentText').innerText =
+            `Are you sure you want to pay ${billName} worth ₱${parseFloat(amount).toFixed(2)}?`;
+
+        document.getElementById('paymentModal').style.display = 'flex';
     });
 });
+
+document.getElementById('confirmPayBtn').addEventListener('click', () => {
+    if (selectedForm) selectedForm.submit();
+});
+
+function closePaymentModal() {
+    document.getElementById('paymentModal').style.display = 'none';
+    selectedForm = null;
+}
 
 function openSidebar(){ 
     document.getElementById('sidebar').style.left='0'; 
@@ -490,5 +505,43 @@ function goTo(url){
     window.location.href=url; 
 }
 </script>
+
+<!-- PAYMENT CONFIRMATION MODAL -->
+<div id="paymentModal" class="logout-modal">
+    <div class="logout-box">
+        <h2>Confirm Payment</h2>
+        <p id="paymentText"></p>
+        <div class="logout-actions">
+            <button id="confirmPayBtn">Pay</button>
+            <button onclick="closePaymentModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- LOGOUT MODAL -->
+<div id="logoutModal" class="logout-modal">
+    <div class="logout-box">
+        <h2>Logout Confirmation</h2>
+        <p>Are you sure you want to log out?</p>
+        <div class="logout-actions">
+            <button onclick="doLogout()">Logout</button>
+            <button onclick="closeLogout()">Cancel</button>
+        </div>
+    </div>
+</div>
+<script src="Dashboard.js"></script>
+
+<!-- prevent back button after logout -->
+<script>
+window.onload = function() {
+    history.pushState(null, null, location.href);
+    window.onpopstate = function() {
+        // If somehow the user goes back, force redirect
+        window.location.href = 'Login.php';
+    };
+};
+</script>
+
 </body>
 </html>
