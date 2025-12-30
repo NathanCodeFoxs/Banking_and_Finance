@@ -46,5 +46,5 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-// =====[ Optional: Regenerate Session ID After Login or OTP Verification ]=====
+// =====[ Regenerate Session ID After Login or OTP Verification ]=====
 // session_regenerate_id(true); // uncomment after successful login/OTP

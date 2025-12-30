@@ -153,7 +153,6 @@ $stmt->close();
         font-family: "Georgia", "Times New Roman", serif;
     }
 
-    /* ========[ SIDEBAR ]======== */
     .sidebar-bg {
         position: fixed;
         top: 0; left: 0;
@@ -225,7 +224,7 @@ $stmt->close();
 </head>
 <body>
 
-<!-- ======[ SIDEBAR + NAVBAR ]====== -->
+<!-- =====[ SIDEBAR + NAVBAR ]===== -->
 <div class="header">
 <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
@@ -247,7 +246,7 @@ $stmt->close();
 </div>
 </div>
 
-<!-- ======[ WITHDRAWAL CARD ]===== -->
+<!-- =====[ WITHDRAWAL CARD ]===== -->
 <div class="card">
 
     <?php
@@ -275,7 +274,7 @@ $stmt->close();
     </form>
 </div>
 
-<!-- LOGOUT MODAL -->
+<!-- =====[ LOGOUT MODAL ]===== -->
 <div id="logoutModal" class="logout-modal">
     <div class="logout-box">
         <h2>Logout Confirmation</h2>

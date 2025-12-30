@@ -63,76 +63,74 @@ if(isset($_SESSION['payment_success'])) {
     flex-direction: column;
   }
 
+  .sidebar-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      overflow: hidden;
+      transition: 0.3s ease;
+      z-index: 10;
+  }
 
-  /* ========[ SIDEBAR ]======== */
-.sidebar-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    overflow: hidden;
-    transition: 0.3s ease;
-    z-index: 10;
-}
+  .header{
+      width: 100%;
+      height: 100px;
+      background: #0b2931;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  }
 
-.header{
-    width: 100%;
-    height: 100px;
-    background: #0b2931;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+  .nav-head{
+      width: 100%;
+      height: 80px;
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      }
 
-.nav-head{
-    width: 100%;
-    height: 80px;
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    }
+  .sidebar {
+      width: 280px;
+      height: 100%;
+      background: #0b1f29;
+      left: -280px;
+      top: 0;
+      padding-top: 40px;
+      transition: 0.3s ease;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+  }
 
-.sidebar {
-    width: 280px;
-    height: 100%;
-    background: #0b1f29;
-    left: -280px;
-    top: 0;
-    padding-top: 40px;
-    transition: 0.3s ease;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.4);
-}
+  .sidebar a {
+      display: block;
+      padding: 18px 30px;
+      color: #ac8f45;
+      font-size: 20px;
+      text-decoration: none;
+      cursor: pointer;
+  }
 
-.sidebar a {
-    display: block;
-    padding: 18px 30px;
-    color: #ac8f45;
-    font-size: 20px;
-    text-decoration: none;
-    cursor: pointer;
-}
+  .sidebar img{
+      margin-right: 15px;
+      vertical-align: middle;
+  }
 
-.sidebar img{
-    margin-right: 15px;
-    vertical-align: middle;
-}
+  .sidebar a:hover {
+      background: #10303a;
+  }
 
-.sidebar a:hover {
-    background: #10303a;
-}
-
-.menu-icon {
-    font-size: 32px;
-    cursor: pointer;
-    color: white;
-    margin-left: 20px;
-}
-  .bell-icon {
-    margin-right: 20px;
-    visibility: hidden;
-}
+  .menu-icon {
+      font-size: 32px;
+      cursor: pointer;
+      color: white;
+      margin-left: 20px;
+  }
+    .bell-icon {
+      margin-right: 20px;
+      visibility: hidden;
+  }
 
   .header-title {
     font-size: 40px;
@@ -161,9 +159,9 @@ if(isset($_SESSION['payment_success'])) {
   }
 
   .section-header {
-    background: #0B3037;        /* same as table-wrapper */
+    background: #0B3037;
     padding: 14px 20px;
-    border-radius: 6px 6px 0 0; /* smooth top corners */
+    border-radius: 6px 6px 0 0;
     font-size: 20px;
     font-weight: 600;
     color: #e7c97a;
@@ -171,21 +169,20 @@ if(isset($_SESSION['payment_success'])) {
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     width: 100%;
     max-width: 900px;
-    margin: 50px auto 0;       /* pull it close to table */
+    margin: 50px auto 0;
   }
 
   .table-wrapper {
-    margin: 0 auto 30px;  /* remove extra top space */
+    margin: 0 auto 30px;
     max-width: 900px;
     background: #0B3037;
-    border-radius: 0 0 6px 6px; /* rounded bottom only */
+    border-radius: 0 0 6px 6px;
     padding: 8px 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
   }
 
-  /* scrollable area for table */
   .table-scroll {
-    max-height: 170px;    /* adjust height as you like */
+    max-height: 170px;
     overflow-y: auto;
   }
 
@@ -211,7 +208,7 @@ if(isset($_SESSION['payment_success'])) {
     border-bottom: none;
     font-weight: 600;
     position: sticky;
-    top: 0;               /* header stays visible while scrolling */
+    top: 0;
     z-index: 50;
     padding: 12px 10px;
     box-shadow: 0 2px #000000;
@@ -223,9 +220,9 @@ if(isset($_SESSION['payment_success'])) {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 1px;          /* thickness of border */
-    background: #000;     /* border color */
-    z-index: 100;         /* stays on top */
+    height: 1px;
+    background: #000;
+    z-index: 100;
   }
 
   td {
@@ -242,7 +239,7 @@ if(isset($_SESSION['payment_success'])) {
     justify-content: center;
     margin-top: 100px;      
     margin-bottom: 50px;
-    }
+  }
 
   .pay-options-header {
     background: #03242e;
@@ -294,7 +291,6 @@ if(isset($_SESSION['payment_success'])) {
     box-shadow: inset 0 1px 3px rgba(255,255,255,0.4);
   }
 
-
   @media (max-width: 768px) {
     .title {
       font-size: 30px;
@@ -323,7 +319,7 @@ if(isset($_SESSION['payment_success'])) {
 
   .bill-card:hover .bill-card-top {
     box-shadow: 0 6px 20px rgba(0,0,0,0.8);
-    background: #033543; /* slightly brighter like dashboard hover */
+    background: #033543;
   }
 
   .bill-card:hover .bill-amount {
@@ -360,7 +356,6 @@ if(isset($_SESSION['payment_success'])) {
     font-weight: bold;
     font-size: 24px;
   }
-
 
 </style>
 </head>
@@ -420,7 +415,7 @@ if(isset($_SESSION['payment_success'])) {
         </div>
     </div>
 
-  <!-- GOLD OVAL BALANCE -->
+  <!-- =====[ BALANCE ]===== -->
   <div style="width: 100%; text-align: center; margin: 40px 0;">
       <div class="balance-oval">
           Available Balance: <span>₱ <?php echo number_format($balance,2); ?></span>
@@ -506,7 +501,7 @@ function goTo(url){
 }
 </script>
 
-<!-- PAYMENT CONFIRMATION MODAL -->
+<!-- =====[ PAYMENT CONFIRMATION MODAL ]===== -->
 <div id="paymentModal" class="logout-modal">
     <div class="logout-box">
         <h2>Confirm Payment</h2>
@@ -519,7 +514,7 @@ function goTo(url){
 </div>
 
 
-<!-- LOGOUT MODAL -->
+<!-- =====[ LOGOUT MODAL ]===== -->
 <div id="logoutModal" class="logout-modal">
     <div class="logout-box">
         <h2>Logout Confirmation</h2>

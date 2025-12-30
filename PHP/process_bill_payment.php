@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/auth.php"; // starts session
+require_once __DIR__ . "/auth.php";
 require_once __DIR__ . "/db.php";
 
 $user_id = $_SESSION['user_id'];

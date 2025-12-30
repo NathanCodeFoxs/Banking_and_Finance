@@ -61,11 +61,12 @@ $bal_stmt->close();
     cursor: pointer;
     color: white;
     margin-left: 20px;
-}
-.bell-icon {
-    margin-right: 20px;
-    visibility: hidden;
-}
+    }
+    
+    .bell-icon {
+        margin-right: 20px;
+        visibility: hidden;
+    }
 
     .header-title {
         font-size: 40px;
@@ -223,13 +224,11 @@ $bal_stmt->close();
         box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
 
-    /* Remove table's own border so it blends inside the box */
     .history-box table {
         width: 100%;
         border-collapse: collapse;
     }
 
-    /* Header row styling */
     .history-box thead tr {
         background: #0E3A48;
     }
@@ -312,64 +311,63 @@ $bal_stmt->close();
         background: #033543;
     }
 
-    /* ========[ SIDEBAR ]======== */
-.sidebar-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    overflow: hidden;
-    transition: 0.3s ease;
-    z-index: 10;
-}
+    .sidebar-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 0;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        overflow: hidden;
+        transition: 0.3s ease;
+        z-index: 10;
+    }
 
-.sidebar {
-    width: 280px;
-    height: 100%;
-    background: #0b1f29;
-    position: absolute;
-    left: -280px;
-    top: 0;
-    padding-top: 40px;
-    transition: 0.3s ease;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.4);
-}
+    .sidebar {
+        width: 280px;
+        height: 100%;
+        background: #0b1f29;
+        position: absolute;
+        left: -280px;
+        top: 0;
+        padding-top: 40px;
+        transition: 0.3s ease;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+    }
 
-.sidebar a {
-    display: block;
-    padding: 18px 30px;
-    color: #ac8f45;
-    font-size: 20px;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .sidebar a {
+        display: block;
+        padding: 18px 30px;
+        color: #ac8f45;
+        font-size: 20px;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-.sidebar img{
-    margin-right: 15px;
-    vertical-align: middle;
-}
+    .sidebar img{
+        margin-right: 15px;
+        vertical-align: middle;
+    }
 
-.sidebar a:hover {
-    background: #10303a;
-}
+    .sidebar a:hover {
+        background: #10303a;
+    }
 
-  .balance-oval {
-    padding: 20px 40px;
-    background: #AC8F45;
-    border-radius: 50px;
-    font-size: 22px;
-    font-weight: 600;
-    color: #ffffff;
-    text-align: center;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.6);
-    display: inline-block;
-  }
+    .balance-oval {
+        padding: 20px 40px;
+        background: #AC8F45;
+        border-radius: 50px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #ffffff;
+        text-align: center;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+        display: inline-block;
+    }
 
-  .balance-oval span {
-    font-weight: bold;
-    font-size: 24px;
-  }
+    .balance-oval span {
+        font-weight: bold;
+        font-size: 24px;
+    }
 
 </style>
 </head>
@@ -400,7 +398,7 @@ $bal_stmt->close();
     </div>
 </div>
 
-<!-- TRANSACTION HISTORY -->
+<!-- =====[ TRANSACTION HISTORY ]===== -->
 <div class="history-box">
 <div class="section-title">Transaction History</div>
 
@@ -430,14 +428,14 @@ $bal_stmt->close();
 </div>
 </div>
 
-  <!-- GOLD OVAL BALANCE -->
-  <div style="width: 100%; text-align: center; margin: 40px 0;">
-      <div class="balance-oval">
-          Available Balance: <span>₱ <?php echo number_format($balance,2); ?></span>
-      </div>
-  </div>
+  <!-- =====[ BALANCE ]===== -->
+<div style="width: 100%; text-align: center; margin: 40px 0;">
+    <div class="balance-oval">
+        Available Balance: <span>₱ <?php echo number_format($balance,2); ?></span>
+    </div>
+</div>
 
-<!-- TRANSFER OPTIONS -->
+<!-- =====[ TRANSFER OPTIONS ]===== -->
 <div class="pay-options-header-wrap">
     <div class="pay-options-header">Transfer Options</div>
 </div>
@@ -458,7 +456,7 @@ $bal_stmt->close();
     </a>
 </div>
 
-<!-- LOGOUT MODAL -->
+<!-- =====[ LOGOUT MODAL ]===== -->
 <div id="logoutModal" class="logout-modal">
     <div class="logout-box">
         <h2>Logout Confirmation</h2>

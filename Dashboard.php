@@ -35,193 +35,185 @@ if ($user_id) {
     font-family: "Times New Roman", serif;
     background: linear-gradient(to right, #134E5E,#0B3037);
     overflow: hidden;
-}
-
-
-/* =====[ NAVBAR ]===== */
-.header{
-    width: 100%;
-    height: 100px;
-    background: #0b2931;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.header-title {
-    font-size: 40px;
-    font-family: "Georgia", "Times New Roman", serif;
-    font-weight: 600;
-    color: #FFFFFF;
-}
-
-.header-logo{
-    height: 80px;
-    margin: 10px 10px;
-}
-
-.nav-head{
-    width: 100%;
-    height: 80px;
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     }
 
-.acro_compa{
-    display: inline-block;
-    background: linear-gradient(to right, #AC8F45, #6E5A27);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 28px;
-    font-weight: bold;
-    vertical-align: middle;
-}
-span{
-    margin-left: auto;
-    margin-right: 20px;
-}
+    .header{
+        width: 100%;
+        height: 100px;
+        background: #0b2931;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-.menu-icon {
-    font-size: 32px;
-    cursor: pointer;
-    color: white;
-    margin-left: 20px;
-}
+    .header-title {
+        font-size: 40px;
+        font-family: "Georgia", "Times New Roman", serif;
+        font-weight: 600;
+        color: #FFFFFF;
+    }
 
-.bbc-logo {
-    display: flex;
-    align-items: center;
-    color: #ac8f45;
-    font-size: 36px;
-    font-weight: bold;
-}
+    .header-logo{
+        height: 80px;
+        margin: 10px 10px;
+    }
 
-.bell-icon {
-    font-size: 32px;
-    color: #ac8f45;
-    cursor: pointer;
-    visibility: hidden;
-}
+    .nav-head{
+        width: 100%;
+        height: 80px;
+        background: transparent;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
 
-/* ========[ SIDEBAR ]======== */
-.sidebar-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    overflow: hidden;
-    transition: 0.3s ease;
-    z-index: 10;
-}
+    .acro_compa{
+        display: inline-block;
+        background: linear-gradient(to right, #AC8F45, #6E5A27);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 28px;
+        font-weight: bold;
+        vertical-align: middle;
+    }
+    span{
+        margin-left: auto;
+        margin-right: 20px;
+    }
 
-.sidebar {
-    width: 280px;
-    height: 100%;
-    background: #0b1f29;
-    position: absolute;
-    left: -280px;
-    top: 0;
-    padding-top: 40px;
-    transition: 0.3s ease;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.4);
-}
+    .menu-icon {
+        font-size: 32px;
+        cursor: pointer;
+        color: white;
+        margin-left: 20px;
+    }
 
-.sidebar a {
-    display: block;
-    padding: 18px 30px;
-    color: #ac8f45;
-    font-size: 20px;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .bbc-logo {
+        display: flex;
+        align-items: center;
+        color: #ac8f45;
+        font-size: 36px;
+        font-weight: bold;
+    }
 
-.sidebar img{
-    margin-right: 15px;
-    vertical-align: middle;
-}
+    .bell-icon {
+        font-size: 32px;
+        color: #ac8f45;
+        cursor: pointer;
+        visibility: hidden;
+    }
 
-.sidebar a:hover {
-    background: #10303a;
-}
+    .sidebar-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 0;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        overflow: hidden;
+        transition: 0.3s ease;
+        z-index: 10;
+    }
 
-a #active {
-    background: #10303a;
-    font-weight: bold;
-}
+    .sidebar {
+        width: 280px;
+        height: 100%;
+        background: #0b1f29;
+        position: absolute;
+        left: -280px;
+        top: 0;
+        padding-top: 40px;
+        transition: 0.3s ease;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+    }
 
-/* =====[ BALANCE CARD ]===== */
-.balance-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #0b2931;
-    height: 310px;
-    margin-top: 80px;
-}
+    .sidebar a {
+        display: block;
+        padding: 18px 30px;
+        color: #ac8f45;
+        font-size: 20px;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-.balance-card {
-    background: #ac8f45;
-    width: 700px;
-    height: 160px;
-    border-radius: 18px;
-    text-align: center;
-    padding-top: 18px;
-    box-sizing: border-box;
-}
+    .sidebar img{
+        margin-right: 15px;
+        vertical-align: middle;
+    }
 
-.balance-label {
-    color: white;
-    font-size: 20px;
-    letter-spacing: 2px;
-}
+    .sidebar a:hover {
+        background: #10303a;
+    }
 
-.eye-icon {
-    margin-left: 5px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
+    a #active {
+        background: #10303a;
+        font-weight: bold;
+    }
 
-.balance-amount {
-    color: white;
-    font-size: 64px;
-    margin-top: 5px;
-    margin-right: 25px;
-}
+    .balance-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0b2931;
+        height: 310px;
+        margin-top: 80px;
+    }
 
-/* =====[ ICON BUTTONS ]===== */
-.icon-row {
-    margin-top: 100px;
-    display: flex;
-    justify-content: space-around;
-    padding: 0px 50px;
-}
+    .balance-card {
+        background: #ac8f45;
+        width: 700px;
+        height: 160px;
+        border-radius: 18px;
+        text-align: center;
+        padding-top: 18px;
+        box-sizing: border-box;
+    }
 
-.icon-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-}
+    .balance-label {
+        color: white;
+        font-size: 20px;
+        letter-spacing: 2px;
+    }
 
-.icon-btn img {
-    width: 70px;
-    height: 70px;
-}
+    .eye-icon {
+        margin-left: 5px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
 
-.icon-btn:hover {
-    transform: scale(1.1);
-}
+    .balance-amount {
+        color: white;
+        font-size: 64px;
+        margin-top: 5px;
+        margin-right: 25px;
+    }
 
+    .icon-row {
+        margin-top: 100px;
+        display: flex;
+        justify-content: space-around;
+        padding: 0px 50px;
+    }
 
+    .icon-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+    }
 
+    .icon-btn img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .icon-btn:hover {
+        transform: scale(1.1);
+    }
 
 </style>
 <body>
@@ -301,7 +293,7 @@ function toggleBalance() {
     </a>
 </div>
 
-<!-- LOGOUT MODAL -->
+<!-- =====[ LOGOUT MODAL ]===== -->
 <div id="logoutModal" class="logout-modal">
     <div class="logout-box">
         <h2>Logout Confirmation</h2>

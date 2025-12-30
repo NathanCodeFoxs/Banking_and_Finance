@@ -40,7 +40,7 @@ $stmt->bind_param("i", $row['id']);
 $stmt->execute();
 $stmt->close();
 
-// 🔓 LOGIN SUCCESS
+// LOGIN SUCCESS
 $_SESSION['user_id'] = $user_id;
 unset($_SESSION['tmp_user_id']);
 

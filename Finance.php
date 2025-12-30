@@ -44,7 +44,6 @@ $taxPlanning += $roundingFix;
   <link rel="stylesheet" href="logout-modal.css">
 
   <style>
-    /* Global font + background */
     body {
       font-family: "Times New Roman", serif;
       margin: 0;
@@ -52,7 +51,6 @@ $taxPlanning += $roundingFix;
       color: #FFFFFF;
     }
 
-    /* Header */
     .header {
       background-color: rgba(11, 48, 55, 0.8);
       display: flex;
@@ -79,7 +77,6 @@ $taxPlanning += $roundingFix;
       font-family: "Georgia", "Times New Roman", serif;
     }
 
-    /* Sidebar */
     .sidebar-bg {
       position: fixed;
       top: 0; left: 0;
@@ -115,7 +112,7 @@ $taxPlanning += $roundingFix;
       display: block;
       padding: 18px 30px;
       color: #ac8f45;
-      font-size: 18px; /* unified font size */
+      font-size: 18px;
       text-decoration: none;
       cursor: pointer;
       font-family: "Times New Roman", serif;
@@ -142,7 +139,6 @@ $taxPlanning += $roundingFix;
       visibility: hidden;
     }
 
-    /* Card + Table */
     .card {
       width: 700px;
       margin: 60px auto;
@@ -163,7 +159,7 @@ $taxPlanning += $roundingFix;
     th, td {
       padding: 15px;
       text-align: left;
-      font-size: 18px; /* unified table font size */
+      font-size: 18px;
       border-bottom: 1px solid #AC8F45;
       font-family: "Georgia", "Times New Roman", serif;
     }
@@ -171,7 +167,7 @@ $taxPlanning += $roundingFix;
     th {
       background-color: #0B3037;
       color: #AC8F45;
-      font-size: 20px; /* slightly larger for headers */
+      font-size: 20px;
     }
 
     td {
@@ -184,7 +180,7 @@ $taxPlanning += $roundingFix;
     }
 
     .total-cell {
-      font-size: 22px; /* highlight total */
+      font-size: 22px;
       color: #AC8F45;
     }
 
@@ -194,8 +190,6 @@ $taxPlanning += $roundingFix;
 <body>
 
 <!-- ======[ SIDEBAR ]====== -->
-
-<!-- HELLO, PAAYOS NG SIZE NG FONT SA SIDEBAR, mas maliit dito sa finance compared sa iba e, di ko rin magawa sry -->
 <div class="header">
   <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
@@ -254,7 +248,7 @@ $taxPlanning += $roundingFix;
 </div>
 
 
-<!-- LOGOUT MODAL -->
+<!-- ====[ LOGOUT MODAL ]==== -->
 <div id="logoutModal" class="logout-modal">
     <div class="logout-box">
         <h2>Logout Confirmation</h2>
@@ -277,8 +271,6 @@ window.onload = function() {
     };
 };
 </script>
-
-
 
 </body>
 </html>

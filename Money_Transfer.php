@@ -13,6 +13,7 @@ $success_msg = $_GET['success'] ?? '';
 <title>Money Transfer</title>
 
 <style>
+    
     body {
         margin: 0;
         font-family: Arial, sans-serif;
@@ -20,7 +21,6 @@ $success_msg = $_GET['success'] ?? '';
         color: #FFFFFF;
     }
 
-    /* HEADER */
     .header {
         width: 100%;
         height: 100px; 
@@ -58,7 +58,6 @@ $success_msg = $_GET['success'] ?? '';
     .left-btn { left: 15px; }
     .right-btn { right: 15px; visibility: hidden;}
 
-    /* FORM FRAME */
     .frame {
         width: 350px;
         margin: 60px auto;
@@ -102,44 +101,46 @@ $success_msg = $_GET['success'] ?? '';
     .confirm-btn:hover {
         opacity: 0.9;
     }
-/* POPUP STYLES */
-#popup {
-    display: none;
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
-    justify-content:center;
-    align-items:center;
-    z-index:100;
-}
 
-#popup-box {
-    background:#0b2931;
-    padding:30px;
-    border-radius:12px;
-    border:2px solid #ac8f45;
-    color:white;
-    text-align:center;
-    max-width:400px;
-}
-#popup-box button {
-    margin-top:20px;
-    padding:10px 20px;
-    border:none;
-    border-radius:8px;
-    background:#ac8f45;
-    color:white;
-    cursor:pointer;
-}
+    #popup {
+        display: none;
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.6);
+        justify-content:center;
+        align-items:center;
+        z-index:100;
+    }
+
+    #popup-box {
+        background:#0b2931;
+        padding:30px;
+        border-radius:12px;
+        border:2px solid #ac8f45;
+        color:white;
+        text-align:center;
+        max-width:400px;
+    }
+
+    #popup-box button {
+        margin-top:20px;
+        padding:10px 20px;
+        border:none;
+        border-radius:8px;
+        background:#ac8f45;
+        color:white;
+        cursor:pointer;
+    }
     
 </style>
 </head>
+
 <body>
 
-<!-- HEADER -->
+<!-- =====[ HEADER ]===== -->
 <div class="header">
     <a href="Transfer.php" class="header-img-btn left-btn">
         <img src="Images/Money_Transfer.png" alt="Back">
@@ -150,7 +151,7 @@ $success_msg = $_GET['success'] ?? '';
     </span>
 </div>
 
-<!-- TRANSFER FORM -->
+<!-- =====[ TRANSFER FORM ]===== -->
 <div class="frame">
 <form action="PHP/process_money_transfer.php" method="POST">
     <label>Recipient Account Number</label>
@@ -166,7 +167,7 @@ $success_msg = $_GET['success'] ?? '';
 </form>
 </div>
 
-<!-- POPUP -->
+<!-- =====[ POPUP ]===== -->
 <div id="popup">
     <div id="popup-box">
         <span id="popup-text"></span><br>

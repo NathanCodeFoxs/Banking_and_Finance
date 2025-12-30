@@ -41,152 +41,150 @@ $stmt->close();
 <link rel="stylesheet" href="logout-modal.css">
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Georgia", "Times New Roman", serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Georgia", "Times New Roman", serif; }
 
-body {
-    font-family: "Georgia", "Times New Roman", serif;
-    min-height: 100vh;
-    background: linear-gradient(90deg, #134E5E 39%, #0B3037 95%);
-    color: white;
-}
+    body {
+        font-family: "Georgia", "Times New Roman", serif;
+        min-height: 100vh;
+        background: linear-gradient(90deg, #134E5E 39%, #0B3037 95%);
+        color: white;
+    }
 
-.header {
-    width: 100%;
-    height: 100px;
-    background: #0b2931;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    .header {
+        width: 100%;
+        height: 100px;
+        background: #0b2931;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-.nav-head {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: transparent;
-}
+    .nav-head {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: transparent;
+    }
 
-.header-title {
-    font-size: 40px;
-    font-weight: 600;
-    color: #FFFFFF;
-}
+    .header-title {
+        font-size: 40px;
+        font-weight: 600;
+        color: #FFFFFF;
+    }
 
-.card {
-    width: 420px;
-    margin: 60px auto 0;
-    padding: 50px 25px;
-    background: rgba(0, 0, 0, 0.32);
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-    border-radius: 6px;
-}
+    .card {
+        width: 420px;
+        margin: 60px auto 0;
+        padding: 50px 25px;
+        background: rgba(0, 0, 0, 0.32);
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+        border-radius: 6px;
+    }
 
-.balance-box {
-    background: #AC8F45; /* Gold oval */
-    padding: 12px 18px;
-    border-radius: 16px;
-    margin-bottom: 25px;
-    text-align: center;
-}
+    .balance-box {
+        background: #AC8F45;
+        padding: 12px 18px;
+        border-radius: 16px;
+        margin-bottom: 25px;
+        text-align: center;
+    }
 
-.balance-label {
-    font-size: 16px;
-    letter-spacing: 1.5px;
-    margin-bottom: 4px;
-}
+    .balance-label {
+        font-size: 16px;
+        letter-spacing: 1.5px;
+        margin-bottom: 4px;
+    }
 
-.balance-value {
-    font-size: 28px;
-    line-height: 1.2;
-}
+    .balance-value {
+        font-size: 28px;
+        line-height: 1.2;
+    }
 
-.input-wrap {
-    width: 80%;
-    margin: 0 auto 30px;
-    text-align: left;
-}
+    .input-wrap {
+        width: 80%;
+        margin: 0 auto 30px;
+        text-align: left;
+    }
 
-.label {
-    font-size: 16px;
-    margin-bottom: 8px;
-}
+    .label {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
 
-input {
-    width: 100%;
-    padding: 14px;
-    border-radius: 6px;
-    background: transparent;
-    border: 2px solid #AC8F45;
-    color: white;
-    font-size: 16px;
-    outline: none;
-}
+    input {
+        width: 100%;
+        padding: 14px;
+        border-radius: 6px;
+        background: transparent;
+        border: 2px solid #AC8F45;
+        color: white;
+        font-size: 16px;
+        outline: none;
+    }
 
-.card form button {
-    width: 80%;
-    padding: 13px 0;
-    background: #AC8F45;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #FFFFFF;
-    cursor: pointer;
-}
+    .card form button {
+        width: 80%;
+        padding: 13px 0;
+        background: #AC8F45;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #FFFFFF;
+        cursor: pointer;
+    }
 
-/* SIDEBAR */
-.sidebar-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    overflow: hidden;
-    transition: 0.3s ease;
-    z-index: 10;
-}
+    .sidebar-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 0;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        overflow: hidden;
+        transition: 0.3s ease;
+        z-index: 10;
+    }
 
-.sidebar {
-    width: 280px;
-    height: 100%;
-    background: #0b1f29;
-    left: -280px;
-    top: 0;
-    padding-top: 40px;
-    transition: 0.3s ease;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.4);
-}
+    .sidebar {
+        width: 280px;
+        height: 100%;
+        background: #0b1f29;
+        left: -280px;
+        top: 0;
+        padding-top: 40px;
+        transition: 0.3s ease;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+    }
 
-.sidebar a {
-    display: block;
-    padding: 18px 30px;
-    color: #ac8f45;
-    font-size: 18px;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .sidebar a {
+        display: block;
+        padding: 18px 30px;
+        color: #ac8f45;
+        font-size: 18px;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-.sidebar img {
-    margin-right: 15px;
-    vertical-align: middle;
-}
+    .sidebar img {
+        margin-right: 15px;
+        vertical-align: middle;
+    }
 
-.sidebar a:hover {
-    background: #10303a;
-}
+    .sidebar a:hover {
+        background: #10303a;
+    }
 
-.menu-icon { font-size: 32px; cursor: pointer; color: white; margin-left: 20px; }
-.bell-icon { margin-right: 20px; visibility: hidden;}
-
+    .menu-icon { font-size: 32px; cursor: pointer; color: white; margin-left: 20px; }
+    .bell-icon { margin-right: 20px; visibility: hidden;}
 
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR + NAVBAR -->
+<!-- =====[ SIDEBAR + NAVBAR ]==== -->
 <div class="header">
 <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
     <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
@@ -208,7 +206,7 @@ input {
 </div>
 </div>
 
-<!-- DEPOSIT CARD -->
+<!-- =====[ DEPOSIT CARD ]===== -->
 <div class="card">
 <?php
 if (!empty($_SESSION['deposit_error'])) {
@@ -235,7 +233,7 @@ if (!empty($_SESSION['deposit_success'])) {
 </form>
 </div>
 
-<!-- LOGOUT MODAL -->
+<!-- =====[ LOGOUT MODAL ]===== -->
 <div id="logoutModal" class="logout-modal">
     <div class="logout-box">
         <h2>Logout Confirmation</h2>

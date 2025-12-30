@@ -1,4 +1,4 @@
-/* ===== SIDEBAR ===== */
+/* =====[ SIDEBAR ]===== */
 function openSidebar() {
     const sidebar = document.getElementById("sidebar");
     const bg = document.getElementById("sidebarBg");
@@ -17,12 +17,12 @@ function closeSidebar() {
     bg.style.width = "0";
 }
 
-/* ===== NAVIGATION ===== */
+/* =====[ NAVIGATION ]===== */
 function goTo(url) {
     window.location.href = url;
 }
 
-/* ===== LOGOUT MODAL ===== */
+/* =====[ LOGOUT MODAL ]===== */
 function confirmLogout() {
     const modal = document.getElementById("logoutModal");
     if (modal) modal.style.display = "flex";
@@ -37,7 +37,7 @@ function doLogout() {
     window.location.href = "PHP/logout.php";
 }
 
-/* ===== SECURITY: BLOCK BACK AFTER LOGOUT ===== */
+/* =====[ SECURITY: BLOCK BACK AFTER LOGOUT ]===== */
 (function () {
     history.pushState(null, "", location.href);
     window.addEventListener("popstate", function () {

@@ -96,52 +96,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OTP Verification - BBC</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(to right, #134E5E, #0B3037);
-    color: white;
-}
 
-.otp-container {
-    background: rgba(0,0,0,0.3);
-    padding: 30px 40px;
-    border-radius: 10px;
-    text-align: center;
-}
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #134E5E, #0B3037);
+        color: white;
+    }
 
-.otp-container h2 { margin-bottom: 20px; }
+    .otp-container {
+        background: rgba(0,0,0,0.3);
+        padding: 30px 40px;
+        border-radius: 10px;
+        text-align: center;
+    }
 
-.otp-inputs input {
-    width: 40px;
-    height: 50px;
-    font-size: 24px;
-    text-align: center;
-    margin: 0 5px;
-    border-radius: 5px;
-    border: 2px solid #AC8F45;
-    background: transparent;
-    color: white;
-}
+    .otp-container h2 { margin-bottom: 20px; }
 
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 18px;
-    background: linear-gradient(to top, #AC8F45, #6E5A27);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #0b2931;
-}
+    .otp-inputs input {
+        width: 40px;
+        height: 50px;
+        font-size: 24px;
+        text-align: center;
+        margin: 0 5px;
+        border-radius: 5px;
+        border: 2px solid #AC8F45;
+        background: transparent;
+        color: white;
+    }
 
-.timer {
-    margin-top: 15px;
-    font-size: 14px;
-}
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        background: linear-gradient(to top, #AC8F45, #6E5A27);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #0b2931;
+    }
+
+    .timer {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+    
 </style>
 </head>
 <body>

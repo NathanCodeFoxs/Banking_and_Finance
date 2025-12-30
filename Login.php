@@ -54,159 +54,158 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="login.css" />
 </head>
 <style>
-/* GENERAL */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Times New Roman", serif;
-    background: linear-gradient(to right, #134E5E,#0B3037);
-    overflow: hidden;
-}
-/* Header */
-.header{
-    width: 100%;
-    height: 100px;
-    background: #0b2931;
-    display: flex;
-    align-items: center;
-}
 
-.header-logo{
-    height: 80px;
-    margin: 10px 10px;
-}
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Times New Roman", serif;
+        background: linear-gradient(to right, #134E5E,#0B3037);
+        overflow: hidden;
+    }
 
-.acro_compa{
-    display: inline-block;
-    background: linear-gradient(to right, #AC8F45, #6E5A27);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 28px;
-    font-weight: bold;
-    vertical-align: middle;
-}
+    .header{
+        width: 100%;
+        height: 100px;
+        background: #0b2931;
+        display: flex;
+        align-items: center;
+    }
 
-.container {
-    display: flex;
-    height: 100vh;
-    width: 100%;
-}
+    .header-logo{
+        height: 80px;
+        margin: 10px 10px;
+    }
 
-/* LEFT SECTION */
-.left-section {
-    width: 55%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 100px;
-}
+    .acro_compa{
+        display: inline-block;
+        background: linear-gradient(to right, #AC8F45, #6E5A27);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 28px;
+        font-weight: bold;
+        vertical-align: middle;
+    }
 
-.logo-circle {
-    width: 350px;
-    height: 350px;
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: gold;
-}
+    .container {
+        display: flex;
+        height: 100vh;
+        width: 100%;
+    }
 
-.logo-icon {
-    width: 420px;
-    height: 420px;
-    margin-bottom: 20px;
-    margin-left: 12px;
-}
+    .left-section {
+        width: 55%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 100px;
+    }
 
-.logo-circle h2 {
-    font-size: 32px;
-    letter-spacing: 3px;
-}
+    .logo-circle {
+        width: 350px;
+        height: 350px;
+        background: rgba(0, 0, 0, 0.25);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: gold;
+    }
 
-/* RIGHT SECTION */
-.right-section {
-    width: 45%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 100px;
-}
+    .logo-icon {
+        width: 420px;
+        height: 420px;
+        margin-bottom: 20px;
+        margin-left: 12px;
+    }
 
-.login-box {
-    width: 45%;
-    padding: 40px 50px 40px 30px;
-    border: 2px solid goldenrod;
-    background: rgba(0, 0, 0, 0.15);
-    color: white;
-    text-align: center;
-}
+    .logo-circle h2 {
+        font-size: 32px;
+        letter-spacing: 3px;
+    }
 
-.login-box h1 {
-    font-size: 40px;
-    margin-bottom: 5px;
-}
+    .right-section {
+        width: 45%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 100px;
+    }
 
-.welcome-text {
-    margin-bottom: 25px;
-    font-size: 14px;
-}
+    .login-box {
+        width: 45%;
+        padding: 40px 50px 40px 30px;
+        border: 2px solid goldenrod;
+        background: rgba(0, 0, 0, 0.15);
+        color: white;
+        text-align: center;
+    }
 
-label {
-    display: block;
-    text-align: left;
-    background: linear-gradient(to right, #AC8F45, #6E5A27);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 15px;
-    font-size: 16px;
-}
+    .login-box h1 {
+        font-size: 40px;
+        margin-bottom: 5px;
+    }
 
-input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid;
-    border-image: linear-gradient(to right, #AC8F45, #6E5A27) 1;
-    border-radius: 5px;
-    margin-top: 5px;
-    background: transparent;
-    color: white;
-    font-size: 15px;
-}
+    .welcome-text {
+        margin-bottom: 25px;
+        font-size: 14px;
+    }
 
-.login-btn {
-    width: auto;
-    max-width: 100%;
-    margin-top: 25px;
-    padding: 12px;
-    background: linear-gradient(to top, #AC8F45, #6E5A27) ;
-    border: none;
-    color: #0b2931;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 10px;
-    cursor: pointer;
-}
+    label {
+        display: block;
+        text-align: left;
+        background: linear-gradient(to right, #AC8F45, #6E5A27);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-top: 15px;
+        font-size: 16px;
+    }
 
-.small {
-    margin-top: 10px;
-    font-size: 14px;
-}
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid;
+        border-image: linear-gradient(to right, #AC8F45, #6E5A27) 1;
+        border-radius: 5px;
+        margin-top: 5px;
+        background: transparent;
+        color: white;
+        font-size: 15px;
+    }
 
-a {
-    background: linear-gradient(to right, #AC8F45, #6E5A27);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-decoration: none;
-}
+    .login-btn {
+        width: auto;
+        max-width: 100%;
+        margin-top: 25px;
+        padding: 12px;
+        background: linear-gradient(to top, #AC8F45, #6E5A27) ;
+        border: none;
+        color: #0b2931;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+    }
 
-a:hover{
-    color: #cda85c;
-    text-decoration: underline;
-}
+    .small {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    a {
+        background: linear-gradient(to right, #AC8F45, #6E5A27);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-decoration: none;
+    }
+
+    a:hover{
+        color: #cda85c;
+        text-decoration: underline;
+    }
+    
 </style>
 <body>
     <div class="header">
@@ -214,14 +213,12 @@ a:hover{
         <p class="acro_compa">BBC</p>
     </div>
     <div class="container">
-        <!-- Left Section -->
         <div class="left-section">
             <div class="logo-circle">
                 <img src="Images/Login.png" alt="Logo" class="logo-icon">
             </div>
         </div>
 
-        <!-- Right Section -->
         <div class="right-section">
             <div class="login-box">
                 <h1>Login</h1>

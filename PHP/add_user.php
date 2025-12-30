@@ -1,6 +1,6 @@
 <?php
 include 'db.php';
-include 'encryption.php'; // Only needed if you want to keep email/phone encrypted
+include 'encryption.php';
 
 // User data
 /*

@@ -15,7 +15,6 @@
         color: #FFFFFF;
     }
 
-    /* HEADER */
     .header {
     width: 100%;
     height: 100px; 
@@ -25,7 +24,6 @@
     justify-content: center;
     position: relative;
     }
-
 
     .header-title {
         font-size: 40px;
@@ -52,9 +50,9 @@
     }
 
     .left-btn { left: 15px; }
+
     .right-btn { right: 15px; visibility: hidden;}
 
-    /* FORM FRAME */
     .frame {
         width: 350px;
         margin: 60px auto;
@@ -66,7 +64,6 @@
         font-size: 14px;
     }
 
-    /* LABELS */
     .frame label {
         display: block;
         color: #FFFFFF;
@@ -94,7 +91,6 @@
     color: #FFFFFF;
     }
 
-    /* Confirm Button */
     .confirm-btn {
         width: 100%;
         padding: 12px;
@@ -113,7 +109,7 @@
 </head>
 <body>
 
-<!-- HEADER WITH BUTTONS -->
+<!-- =====[ HEADER ]===== -->
 <div class="header">
     <a href="Transfer.php" class="header-img-btn left-btn">
         <img src="Images/Bank_Transfer.png" alt="Left Button">
@@ -126,7 +122,7 @@
     </a>
 </div>
 
-<!-- TRANSFER FORM FRAME -->
+<!-- =====[ TRANSFER FORM FRAME ]===== -->
 <div class="frame">
 <form action="PHP/process_bank_transfer.php" method="POST">
 

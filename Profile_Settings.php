@@ -71,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             overflow-x: hidden;
         }
 
-        /* =====[ NAVBAR ]===== */
         .header {
             width: 100%;
             height: 100px;
@@ -106,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-left: 20px;
         }
 
-        /* =====[ CONTENT ]===== */
         .content-wrapper {
             display: flex;
             flex-direction: column;
@@ -190,7 +188,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transform: scale(1.02);
         }
 
-        /* =====[ POPUP ]===== */
         .popup-bg {
             position: fixed;
             top: 0;
@@ -288,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
+<!-- =====[ NAVBAR ]===== -->
 <div class="header">
     <div class="menu-icon" onclick="window.location.href='Profile_Info.php'">
         <img src="Images/home.png" width="40">
@@ -299,21 +296,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="content-wrapper">
 <div class="settings-card">
 
-<!-- PASSWORD -->
+<!-- =====[ PASSWORD ]==== -->
 <div class="field-group">
     <div class="field-label">PASSWORD</div>
     <input type="password" class="field-value" value="************" readonly>
     <button class="change-btn" onclick="openPasswordPopup()">Change</button>
 </div>
 
-<!-- PHONE -->
+<!-- =====[ PHONE ]===== -->
 <div class="field-group">
     <div class="field-label">PHONE NUMBER</div>
     <input class="field-value" value="<?= htmlspecialchars($phone) ?>" readonly>
     <button class="change-btn" onclick="openPhonePopup()">Change</button>
 </div>
 
-<!-- EMAIL -->
+<!--===== [ EMAIL ]===== -->
 <div class="field-group">
     <div class="field-label">EMAIL</div>
     <input class="field-value" value="<?= htmlspecialchars($email) ?>" readonly>
@@ -323,7 +320,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </div>
 
-<!-- ===== PASSWORD POPUP ===== -->
+<!-- =====[ PASSWORD POPUP ]===== -->
 <div class="popup-bg" id="passwordPopup">
 <form method="POST" class="popup-box">
     <h3>Change Password</h3>
@@ -333,7 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </form>
 </div>
 
-<!-- ===== PHONE POPUP ===== -->
+<!-- =====[ PHONE POPUP ]===== -->
 <div class="popup-bg" id="phonePopup">
 <form method="POST" class="popup-box">
     <h3>Change Phone</h3>
@@ -343,7 +340,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </form>
 </div>
 
-<!-- ===== EMAIL POPUP ===== -->
+<!-- =====[ EMAIL POPUP ]===== -->
 <div class="popup-bg" id="emailPopup">
 <form method="POST" class="popup-box">
     <h3>Change Email</h3>

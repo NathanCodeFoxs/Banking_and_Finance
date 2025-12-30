@@ -41,8 +41,6 @@ if (!password_verify($password, $user['password'])) {
     exit();
 }
 
-/* ✅ PASSWORD OK — GENERATE OTP */
-
 // Save temporary user ID in session (user not logged in yet)
 $_SESSION['tmp_user_id'] = $user['id'];
 
@@ -59,15 +57,8 @@ $stmt->bind_param("iss", $user['id'], $otp, $expires);
 $stmt->execute();
 $stmt->close();
 
-/* 🚨 SEND OTP TO EMAIL */
-// For now we just log it for testing
+// SEND OTP TO EMAIL //
 error_log("OTP for user {$user['email']}: $otp");
-
-// Optional: use mail() for testing
-// $subject = "Your OTP Code";
-// $message = "Your OTP is $otp. It expires in 5 minutes.";
-// $headers = "From: noreply@bbc.com";
-// mail($user['email'], $subject, $message, $headers);
 
 // Redirect to OTP verification page
 header("Location: ../otp_verify.php");

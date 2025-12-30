@@ -23,10 +23,10 @@ $account_number = $account_number ?? "N/A";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Info - BBC</title>
-    <link rel="stylesheet" href="logout-modal.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Info - BBC</title>
+<link rel="stylesheet" href="logout-modal.css">
     <style>
         * {
             margin: 0;
@@ -41,7 +41,6 @@ $account_number = $account_number ?? "N/A";
             overflow-x: hidden;
         }
 
-        /* =====[ NAVBAR ]===== */
         .header {
             width: 100%;
             height: 100px;
@@ -76,7 +75,6 @@ $account_number = $account_number ?? "N/A";
             margin-left: 20px;
         }
 
-        /* =====[ CONTENT ]===== */
         .content-wrapper {
             display: flex;
             flex-direction: column;
@@ -170,83 +168,82 @@ $account_number = $account_number ?? "N/A";
             }
         }
 
-        /* ========[ SIDEBAR ]======== */
-.sidebar-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    overflow: hidden;
-    transition: 0.3s ease;
-    z-index: 10;
-}
+        .sidebar-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            overflow: hidden;
+            transition: 0.3s ease;
+            z-index: 10;
+        }
 
-.sidebar {
-    width: 280px;
-    height: 100%;
-    background: #0b1f29;
-    position: absolute;
-    left: -280px;
-    top: 0;
-    padding-top: 40px;
-    transition: 0.3s ease;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.4);
-}
+        .sidebar {
+            width: 280px;
+            height: 100%;
+            background: #0b1f29;
+            position: absolute;
+            left: -280px;
+            top: 0;
+            padding-top: 40px;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+        }
 
-.sidebar a {
-    display: block;
-    padding: 18px 30px;
-    color: #ac8f45;
-    font-size: 20px;
-    text-decoration: none;
-    cursor: pointer;
-}
+        .sidebar a {
+            display: block;
+            padding: 18px 30px;
+            color: #ac8f45;
+            font-size: 20px;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-.sidebar img{
-    margin-right: 15px;
-    vertical-align: middle;
-}
+        .sidebar img{
+            margin-right: 15px;
+            vertical-align: middle;
+        }
 
-.sidebar a:hover {
-    background: #10303a;
-}
-.nav-head{
-    width: 100%;
-    height: 80px;
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    }
+        .sidebar a:hover {
+            background: #10303a;
+        }
 
-    .header{
-    width: 100%;
-    height: 100px;
-    background: #0b2931;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+        .nav-head{
+            width: 100%;
+            height: 80px;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.header-title {
-    font-size: 40px;
-    font-family: "Georgia", "Times New Roman", serif;
-    font-weight: 600;
-    color: #FFFFFF;
-}
+        .header{
+            width: 100%;
+            height: 100px;
+            background: #0b2931;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-.header-logo{
-    height: 80px;
-    margin: 10px 10px;
-}
+        .header-title {
+            font-size: 40px;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-weight: 600;
+            color: #FFFFFF;
+        }
 
+        .header-logo{
+            height: 80px;
+            margin: 10px 10px;
+        }
 
     </style>
 </head>
 <body>
 
-    <!-- =====[ NAVBAR ]===== -->
+    <!-- =====[ HEADER ]===== -->
     <div class="header">
         
         <div class="sidebar-bg" id="sidebarBg" onclick="closeSidebar()">
@@ -290,7 +287,7 @@ $account_number = $account_number ?? "N/A";
         </div>
     </div>
 
-    <!-- LOGOUT MODAL -->
+    <!-- =====[ LOGOUT MODAL ]===== -->
     <div id="logoutModal" class="logout-modal">
         <div class="logout-box">
             <h2>Logout Confirmation</h2>
